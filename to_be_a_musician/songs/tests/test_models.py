@@ -81,6 +81,7 @@ class SongsSongTestCase(SongsBaseTestCase):
         })
         self.assertEqual(self.song.get_absolute_url(), expected_url)
 
+
 class SongsInterpretationTestCase(SongsBaseTestCase):
 
     @classmethod
