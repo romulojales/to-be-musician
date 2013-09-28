@@ -1,7 +1,19 @@
 to-be-musician
 ==============
 
-Django application for to be a musician.
+`to-be-musician` is a project made in 48 hours for [Django Dash][1]. It's purpose is to automate some common tasks
+for music students, like keeping musics, search for audio, lyrics, tabs, etc.
+
+How it works
+------------
+
+When you are studying a song, you have a workflow to follow. It begins with you looking for the song in some resource
+(MP3, Grooveshark, Rdio), looking for some score or tablature, and listening to the music over and over again, until you have
+mastered the song.
+
+With this web application we want to automate all this process, and let you discover and study songs with more agility and
+facility. At the end, when you are rocking the song, you could share this and let others know how you turned yourself
+into a hero.
 
 
 Installing & Running
@@ -41,3 +53,6 @@ To use `to-be-a-musician` in your development environment, you must to add the f
 Also, you need to create two environment variables: `FACEBOOK_KEY` and `FACEBOOK_SECRET`.
 
 Finally, you can access the application using `http://local.to-be-a-musician.herokuapp.com:8000/` and do login with your Facebook account.
+
+  [1]: http://djangodash.com/
+    "Django Dash 2013"
