@@ -1,6 +1,7 @@
 to-be-musician
 ==============
-[![Build Status](https://travis-ci.org/romulojales/to-be-musician.png?branch=master)](https://travis-ci.org/romulojales/to-be-musician)
+[![Build Status](https://travis-ci.org/romulojales/to-be-musician.png?branch=master)](https://travis-ci.org/romulojales/to-be-musician) [![Coverage Status](https://coveralls.io/repos/romulojales/to-be-musician/badge.png?branch=master)](https://coveralls.io/r/romulojales/to-be-musician?branch=master)
+
 
 `to-be-musician` is a project made in 48 hours for [Django Dash][1]. It's purpose is to automate some common tasks
 for music students, like keeping musics, search for audio, lyrics, tabs, etc.
