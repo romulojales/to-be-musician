@@ -6,7 +6,7 @@
 
 {% block main %}
 <h1>{{ object.name }}</h1>
-{% if request.user.is_authenticade %}
+{% if request.user.is_authenticated %}
 <p><a href="#">{% trans "I want to learn" %}</a></p>
 {% endif %}
 <p>{% blocktrans with artist=object.artist.name %}Performed by {{ artist }}.{% endblocktrans %}</p>
