@@ -32,3 +32,15 @@ class SongsSongViewTestCase(TestCase):
 
     def test_is_available_when_have_band_and_song(self):
         self.assertEqual(self.response.status_code, 200)
+
+
+class SongSongView404TestCase(TestCase):
+
+    def test_is_unavailable_when_band_or_song_doesnt_exist(self):
+        route = reverse('songs_song', kwargs={
+            'artist_slug': 'megadeth',
+            'song_slug': 'tornado-of-souls',
+        })
+        response = self.client.get(route)
+
+        self.assertEqual(response.status_code, 404)
