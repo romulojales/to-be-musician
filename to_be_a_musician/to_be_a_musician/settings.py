@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     # Third-party apps
+    'south',
     'social.apps.django_app.default',
 
     # Our apps
