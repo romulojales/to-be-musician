@@ -180,3 +180,12 @@ SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FACEBOOK_SECRET')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+SOUTH_TESTS_MIGRATE = False
+
+def gen_func():
+    return None
+
+MOMMY_CUSTOM_FIELDS_GEN = {
+    'autoslug.fields.AutoSlugField': gen_func,
+}
