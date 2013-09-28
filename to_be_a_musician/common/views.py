@@ -1,5 +1,5 @@
 from django.views.generic.base import TemplateView
-from djtinysong.models import search_songs
+from songs.models import search_songs
 
 
 class SearchView(TemplateView):

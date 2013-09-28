@@ -1,9 +1,14 @@
 import logging
-
 from django.conf import settings
-
-from djtinysong import API_TINYSONG_URL
 import requests
+
+API_TINYSONG_URL = "http://tinysong.com/s/{ARG}"
+
+
+def search_music(argument, limit=32, page=1):
+    offset = limit * (page - 1)
+    musics = get(argument, {"offset": offset, "limit": limit})
+    return musics
 
 
 def get(argument, params):
