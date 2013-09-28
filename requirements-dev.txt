@@ -1,0 +1,3 @@
+-r requirements-base.txt
+
+model-mommy==1.1
