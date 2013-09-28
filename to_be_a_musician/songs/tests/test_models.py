@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from model_mommy import mommy
 from songs import models
@@ -57,14 +58,12 @@ class SongsSongTestCase(SongsBaseTestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.song = mommy.make('songs.song', name='Seek and Destroy')
+        cls.song = mommy.make('songs.song', name='Seek and Destroy',
+                              artist__name='Metallica')
 
     @classmethod
     def tearDownClass(cls):
         cls.song.delete()
-
-    def test_string_representation(self):
-        self.assertEqual(str(self.song), 'Seek and Destroy')
 
     def test_slug_generation(self):
         self.assertEqual(self.song.slug, 'seek-and-destroy')
@@ -72,6 +71,15 @@ class SongsSongTestCase(SongsBaseTestCase):
     def test_has_an_api_id_field(self):
         self.assert_has_field(models.Song, 'api_id')
 
+    def test_string_representation(self):
+        self.assertEqual(str(self.song), 'Seek and Destroy')
+
+    def test_get_absolute_url(self):
+        expected_url = reverse('songs_song', kwargs={
+            'artist_slug': 'metallica',
+            'song_slug': 'seek-and-destroy',
+        })
+        self.assertEqual(self.song.get_absolute_url(), expected_url)
 
 class SongsInterpretationTestCase(SongsBaseTestCase):
 

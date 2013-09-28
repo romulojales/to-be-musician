@@ -33,6 +33,9 @@ class SongsSongViewTestCase(TestCase):
     def test_is_available_when_have_band_and_song(self):
         self.assertEqual(self.response.status_code, 200)
 
+    def test_master_of_puppets_is_in_context(self):
+        self.assertEqual(self.song, self.response.context['object'])
+
 
 class SongSongView404TestCase(TestCase):
 
