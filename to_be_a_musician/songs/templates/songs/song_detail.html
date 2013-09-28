@@ -1,8 +1,12 @@
+{% extends "base.html" %}
+
 {% load i18n %}
 
+{% block main %}
 <h1>{{ object.name }}</h1>
 
 <p><a href="#">{% trans "I want to learn" %}</a></p>
 
 <p>{% blocktrans with artist=object.artist.name %}Performed by {{ artist }}.{% endblocktrans %}</p>
 <p>{% blocktrans with album=object.album.name %}From {{ album }}.{% endblocktrans %}</p>
+{% endblock %}
