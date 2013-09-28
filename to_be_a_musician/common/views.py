@@ -12,4 +12,4 @@ class SearchView(TemplateView):
         if q:
             songs = search_songs(q)
 
-        return {'q': q, 'songs': songs}
+        return {'q': q, 'songs': songs, "request": self.request}
