@@ -1,8 +1,9 @@
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
-from django.contrib.auth.models import User
 import autoslug
+from djtinysong import search_music
 
 
 class Artist(models.Model):
@@ -52,3 +53,26 @@ class Interpretation(models.Model):
         return u"{0}'s interpretation of {1} ({2})".format(self.user.first_name,
                                                            self.song.name,
                                                            self.song.artist.name)
+
+
+def search_songs(argument, page=1):
+    musics = search_music(argument, page)
+    songs = []
+    for music in musics:
+        artist, created = Artist.objects.get_or_create(api_id=music["ArtistID"],
+                                                       name=music["ArtistName"])
+        if created:
+            artist.save()
+        album, created = Album.objects.get_or_create(api_id=music["AlbumID"],
+                                                     name=music["AlbumName"])
+        if created:
+            album.save()
+        song, created = Song.objects.get_or_create(api_id=music["SongID"],
+                                                   artist=artist,
+                                                   album=album,
+                                                   name=music["SongName"],
+                                                   tinysong_url=music["Url"])
+        if created:
+            song.save()
+        songs.append(song)
+    return songs
