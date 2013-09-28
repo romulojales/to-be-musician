@@ -3,7 +3,7 @@ from djtinysong.models import Song, search_songs
 import mock
 
 
-class TestView(unittest.TestCase):
+class TestModels(unittest.TestCase):
 
     def test_simple_class_instance(self):
         dictionary = {
