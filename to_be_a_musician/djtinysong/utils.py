@@ -5,7 +5,7 @@ import requests
 API_TINYSONG_URL = "http://tinysong.com/s/{ARG}"
 
 
-def search_music(argument, limit=32, page=1):
+def search_music(argument, page=1, limit=32):
     offset = limit * (page - 1)
     musics = get(argument, {"offset": offset, "limit": limit})
     return musics

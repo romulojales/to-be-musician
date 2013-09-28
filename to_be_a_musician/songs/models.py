@@ -56,7 +56,7 @@ class Interpretation(models.Model):
 
 
 def search_songs(argument, page=1):
-    musics = search_music(argument, page)
+    musics = search_music(argument, page=page)
     songs = []
     for music in musics:
         artist, created = Artist.objects.get_or_create(api_id=music["ArtistID"],
