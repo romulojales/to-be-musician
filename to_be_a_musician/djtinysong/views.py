@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse
-from djtinysong import TINYSONG_URL
+from djtinysong import API_TINYSONG_URL
 import requests
 
 
