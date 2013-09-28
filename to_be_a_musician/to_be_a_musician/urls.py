@@ -9,7 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name='common/index.html'), name='home'),
     url(r'^search/$', SearchView.as_view(), name='search'),
-
+    url(r'^songs/', include('songs.urls')),
     url(r'^song/', include('djtinysong.urls')),
 
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),

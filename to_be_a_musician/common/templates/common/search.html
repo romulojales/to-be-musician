@@ -8,7 +8,7 @@
 
 {% for song in songs %}
     <div>
-        <h3><a href="{{song.get_absolute_url}}">{{ song.songName }}</a></h3>
+        <h3><a href="{{song.get_absolute_url}}#{{ song.songId }}">{{ song.songName }}</a></h3>
         <small>{% blocktrans with artist=song.artistName album=song.albumName %}By {{ artist }}, from {{ album }}.{% endblocktrans %}</small>
         <p>{{song.player|safe}}</p>
     </div>
