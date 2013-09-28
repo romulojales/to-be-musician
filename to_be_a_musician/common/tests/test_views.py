@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import RequestFactory
+from mock import patch, MagicMock
 from common import views
 
 
@@ -24,21 +25,29 @@ class SearchViewTestCase(TestCase):
     def test_uses_search_template(self):
         self.assertEqual(views.SearchView.template_name, 'common/search.html')
 
-    def test_q_is_in_context(self):
+    @patch('common.views.search_songs')
+    def test_q_is_in_context(self, mock_search_songs):
+        mock_search_songs.return_value = []
+
         search_view = self.get_search_view('/search/?q=megadeth')
         context = search_view.get_context_data()
 
+        mock_search_songs.assert_called_with(u'megadeth')
         self.assertIn('q', context.keys())
         self.assertEqual(context['q'], 'megadeth')
 
-    def test_passing_q_do_a_search(self):
+    @patch('common.views.search_songs')
+    def test_passing_q_do_a_search(self, mock_search_songs):
+        mock_search_songs.return_value = [1, 2, 3, 4, 5]
         search_view = self.get_search_view('/search/?q=metallica')
         context = search_view.get_context_data()
 
+        mock_search_songs.assert_called_with(u'metallica')
         self.assertEqual(len(context['songs']), 5)
-        self.assertEqual(context['songs'][0].songId, '1')
 
-    def test_dont_search_when_hasnt_q(self):
+    @patch('common.views.search_songs')
+    def test_dont_search_when_hasnt_q(self, mock_search_songs):
+        mock_search_songs.return_value = [1, 2, 3, 4, 5]
         search_view = self.get_search_view()
         context = search_view.get_context_data()
 
