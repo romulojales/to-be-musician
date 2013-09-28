@@ -173,7 +173,7 @@ LOGGING = {
     }
 }
 
-TINYSONG_KEY = os.environ.get('TINYSONG_KEY')
+TINYSONG_KEY = "1dbea9a0d261b0e1c2c738bd456dd751"# os.environ.get('TINYSONG_KEY')
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FACEBOOK_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FACEBOOK_SECRET')
 
