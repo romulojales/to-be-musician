@@ -1,1 +1,7 @@
 <h1>So... you want to be a musician, heh?</h1>
+
+{% if user.is_authenticated %}
+    <p><a href="{% url 'logout' %}">Logout</a>, dude!</p>
+{% else %}
+    <p>Hey... a <a href="/login/facebook/">Facebook login button</a>!</p>
+{% endif %}
