@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, url
 from django.views.generic.base import TemplateView
+from musician.views import SongStateView
 
 
 urlpatterns = patterns('',
-    url(r'(?P<state>(learn|learning|learned))/(?P<id>\d+)/$', TemplateView.as_view(template_name='common/index.html'), name='musician_song_state'),
+    url(r'(?P<state>(learn|learning|learned))/(?P<id>\d+)/$', SongStateView.as_view(), name='musician_song_state'),
 )
