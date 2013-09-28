@@ -1,3 +1,5 @@
+from djtinysong import utils
+from django.core.urlresolvers import reverse
 
 
 class Song(object):
@@ -17,3 +19,14 @@ class Song(object):
             self.albumName = kwargs["AlbumName"]
         if "Url" in kwargs:
             self.tinySongURL = kwargs["Url"]
+
+    def get_absolute_url(self):
+        url = reverse("tinysong_song", args=(self.songId,))
+        return url
+
+
+def search_songs(argument, limit=32, page=1):
+    offset = limit * (page - 1)
+    musics = utils.get(argument, {"offset": offset, "limit": limit})
+    musics = [Song(**song) for song in musics]
+    return musics
