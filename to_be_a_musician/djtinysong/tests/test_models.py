@@ -2,7 +2,7 @@ import unittest
 from djtinysong.models import Song
 
 
-class Test(unittest.TestCase):
+class TestView(unittest.TestCase):
 
     def test_simple_class_instance(self):
         dictionary = {
