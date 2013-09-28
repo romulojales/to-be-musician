@@ -1,5 +1,6 @@
 #/ Django settings for to_be_a_musician project.
 
+import os
 from unipath import Path
 
 PROJECT_ROOT_PATH = Path(__file__).parent
@@ -171,4 +172,8 @@ LOGGING = {
     }
 }
 
-TINYSONG_KEY = ""
+TINYSONG_KEY = os.environ.get('TINYSONG_KEY')
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FACEBOOK_SECRET')
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
