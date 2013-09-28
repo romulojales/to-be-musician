@@ -13,7 +13,8 @@ class Song(models.Model):
 
     user = models.ForeignKey(User)
     song = models.ForeignKey(Song)
-    state = models.CharField(_('State'), choices=SONG_STATES, max_length=25)
+    state = models.CharField(_('State'), choices=SONG_STATES, max_length=25,
+                             default='learn')
 
     class Meta:
         unique_together = ('user', 'song', )

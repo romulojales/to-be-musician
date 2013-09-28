@@ -6,15 +6,18 @@ from musician import models
 
 class MusicianBaseViewTestCase(TestCase):
 
-    def setUp(self):
-        self.user = mommy.make('auth.user', username='test', is_active=True)
-        self.user.set_password('test')
-        self.user.save()
-        self.song = mommy.make('songs.song', name='Got the Time',
+    @classmethod
+    def setUpClass(cls):
+        cls.user = mommy.make('auth.user', username='test', is_active=True)
+        cls.user.set_password('test')
+        cls.user.save()
+        cls.song = mommy.make('songs.song', name='Got the Time',
                                artist__name='Anthrax')
 
-    def tearDown(self):
-        self.song.delete()
+    @classmethod
+    def tearDownClass(cls):
+        cls.user.delete()
+        cls.song.delete()
 
     def get_route(self, state):
         return reverse('musician_song_state', kwargs={
@@ -44,7 +47,6 @@ class MusicianLearnRoutesTestCase(MusicianBaseViewTestCase):
 class MusicianChangeLearningStateTestCase(MusicianBaseViewTestCase):
 
     def setUp(self):
-        super(MusicianChangeLearningStateTestCase, self).setUp()
         self.client.login(username='test', password='test')
 
     def test_will_learn_a_song_state(self):
@@ -77,3 +79,21 @@ class MusicianChangeLearningStateTestCase(MusicianBaseViewTestCase):
     def test_redirect_to_music_page(self):
         response = self.client.get(self.get_route('learn'))
         self.assertRedirects(response, '/songs/anthrax/got-the-time/', status_code=301)
+
+    def test_dont_duplicate_a_musician_song(self):
+        self.client.get(self.get_route('learn'))
+        self.client.get(self.get_route('learn'))
+
+        songs = models.Song.objects.all()
+
+        self.assertEqual(len(songs), 1)
+
+    def test_dont_duplication_a_musician_song_with_different_states(self):
+        self.client.get(self.get_route('learn'))
+        self.client.get(self.get_route('learning'))
+        self.client.get(self.get_route('learned'))
+
+        songs = models.Song.objects.all()
+
+        self.assertEqual(len(songs), 1)
+        self.assertEqual(songs[0].state, 'learned')

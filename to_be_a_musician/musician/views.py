@@ -8,9 +8,12 @@ class SongStateView(RedirectView):
 
     def get_redirect_url(self, **kwargs):
         song = get_object_or_404(Song, id=kwargs['id'])
-        musician_song = self.set_song_state(song, kwargs['state'])
+        self.set_song_state(song, kwargs['state'])
+
         return song.get_absolute_url()
 
     def set_song_state(self, song, state):
-        return MusicianSong.objects.get_or_create(song=song, state=state,
-                                                  user=self.request.user)
+        musician_song = MusicianSong.objects.get_or_create(song=song, user=self.request.user)[0]
+
+        musician_song.state = state
+        musician_song.save()
