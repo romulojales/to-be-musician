@@ -44,4 +44,3 @@ class TestModels(unittest.TestCase):
             self.assertEquals(len(musics), 1)
             self.assertEquals(musics[0].get_absolute_url(),
                               "/song/song/269743")
-        
