@@ -1,5 +1,10 @@
+{% extends "base.html "%}
+
 {% load i18n %}
 {% load tinysong %}
+
+{% block main %}
+
 {% if q %}
     <p>{% blocktrans %}You searched for {{ q }}!{% endblocktrans %}</p>
 {% else %}
@@ -13,3 +18,4 @@
         <p>{{song.api_id|flash_player}}</p>
     </div>
 {% endfor %}
+{% endblock %}
