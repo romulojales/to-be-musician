@@ -19,6 +19,10 @@ class SongsArtistTestCase(SongsBaseTestCase):
     def setUpClass(cls):
         cls.artist = mommy.make('songs.artist', name='Metallica')
 
+    @classmethod
+    def tearDownClass(cls):
+        cls.artist.delete()
+
     def test_string_representation(self):
         self.assertEqual(str(self.artist), 'Metallica')
 
@@ -34,6 +38,10 @@ class SongsAlbumTestCase(SongsBaseTestCase):
     @classmethod
     def setUpClass(cls):
         cls.album = mommy.make('songs.album', name="Kill 'Em All")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.album.delete()
 
     def test_string_representation(self):
         self.assertEqual(str(self.album), "Kill 'Em All")
@@ -51,6 +59,10 @@ class SongsSongTestCase(SongsBaseTestCase):
     def setUpClass(cls):
         cls.song = mommy.make('songs.song', name='Seek and Destroy')
 
+    @classmethod
+    def tearDownClass(cls):
+        cls.song.delete()
+
     def test_string_representation(self):
         self.assertEqual(str(self.song), 'Seek and Destroy')
 
@@ -63,11 +75,20 @@ class SongsSongTestCase(SongsBaseTestCase):
 
 class SongsInterpretationTestCase(SongsBaseTestCase):
 
-    def test_string_representation(self):
-        interpretation = mommy.make('songs.interpretation',
+    @classmethod
+    def setUpClass(cls):
+        cls.interpretation = mommy.make('songs.interpretation',
                                     song__name='Seek and Destroy',
                                     artist__name='Metallica',
                                     user__first_name=u'Rômulo')
 
-        self.assertEqual(unicode(interpretation),
+    @classmethod
+    def tearDownClass(cls):
+        cls.interpretation.delete()
+        models.Artist.objects.all().delete()
+        models.Album.objects.all().delete()
+        models.Song.objects.all().delete()
+
+    def test_string_representation(self):
+        self.assertEqual(unicode(self.interpretation),
                         u"Rômulo's interpretation of Seek and Destroy (Metallica)")
