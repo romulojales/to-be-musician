@@ -1,5 +1,5 @@
 {% load i18n %}
-
+{% load tinysong %}
 {% if q %}
     <p>{% blocktrans %}You searched for {{ q }}!{% endblocktrans %}</p>
 {% else %}
@@ -10,6 +10,6 @@
     <div>
         <h3><a href="{{song.get_absolute_url}}#{{ song.songId }}">{{ song.songName }}</a></h3>
         <small>{% blocktrans with artist=song.artistName album=song.albumName %}By {{ artist }}, from {{ album }}.{% endblocktrans %}</small>
-        <p>{{song.player|safe}}</p>
+        <p>{{song.songId|flash_player}}</p>
     </div>
 {% endfor %}
