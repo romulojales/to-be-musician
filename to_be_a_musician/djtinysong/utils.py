@@ -2,7 +2,7 @@ import logging
 from django.conf import settings
 import requests
 
-API_TINYSONG_URL = "http://tinysong.com/s/{ARG}"
+API_TINYSONG_URL = u"http://tinysong.com/s/{ARG}"
 
 
 def search_music(argument, page=1, limit=32):
