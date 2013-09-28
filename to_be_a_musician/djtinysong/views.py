@@ -7,3 +7,7 @@ def search(request, params):
     url = TINYSONG_URL.format(PARAMS=params)
     response = requests.get(url)
     return HttpResponse(response.json(), mimetype="application/json")
+
+
+def song(requests, song_id):
+    pass
