@@ -134,6 +134,7 @@ INSTALLED_APPS = (
 
     # Our apps
     'djtinysong',
+    'songs',
 )
 
 #SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
