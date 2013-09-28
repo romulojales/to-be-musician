@@ -1,4 +1,4 @@
-# Django settings for to_be_a_musician project.
+#/ Django settings for to_be_a_musician project.
 
 from unipath import Path
 
@@ -26,7 +26,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -124,10 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admin',
     'djtinysong'
 )
 
@@ -162,5 +159,4 @@ LOGGING = {
     }
 }
 
-TINYSONG_KEY = "1dbea9a0d261b0e1c2c738bd456dd751"
-
+TINYSONG_KEY = ""
