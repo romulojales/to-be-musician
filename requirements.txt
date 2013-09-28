@@ -15,3 +15,4 @@ static==0.4
 wsgiref==0.1.2
 South==0.8.2
 mock==1.0.1
+model-mommy==1.1
