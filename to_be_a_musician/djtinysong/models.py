@@ -24,6 +24,15 @@ class Song(object):
         url = reverse("tinysong_song", args=(self.songId,))
         return url
 
+    def player(self):
+        return '''<embed src="http://grooveshark.com/songWidget.swf" 
+        type="application/x-shockwave-flash" 
+        width="250" 
+        height="40" 
+        flashvars="hostname=cowbell.grooveshark.com&amp;songIDs=%s&amp;style=metal&amp;p=0"
+        allowscriptaccess="always"
+        wmode="window">''' % self.songId
+
 
 def search_songs(argument, limit=32, page=1):
     offset = limit * (page - 1)

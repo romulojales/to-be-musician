@@ -12,7 +12,3 @@ def search(request, params):
                      "artist": music.artistName,
                      "url": music.get_absolute_url()})
     return HttpResponse(simplejson.dumps(json), mimetype="application/json")
-
-
-def song(requests, songId):
-    pass
