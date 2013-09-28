@@ -113,7 +113,7 @@ class SearchSongTests(SongsBaseTestCase):
         models.Album.objects.all().delete()
 
     def test_search_song_function(self):
-        with  mock.patch("djtinysong.search_music") as mck:
+        with  mock.patch("songs.models.search_music") as mck:
             mck.return_value = [{
         "Url": "http:\/\/tinysong.com\/8We2",
         "SongID": 269743,
@@ -128,3 +128,30 @@ class SearchSongTests(SongsBaseTestCase):
             self.assertEquals(len(models.Song.objects.all()), 1)
             self.assertEquals(len(models.Album.objects.all()), 1)
             self.assertEquals(len(models.Artist.objects.all()), 1)
+            self.assertEquals(models.Song.objects.all()[0].name,
+                              "The Legend Of Lil' Beethoven")
+
+    def test_search_song_with_multiples_musics_in_rsponse(self):
+        with  mock.patch("songs.models.search_music") as mck:
+            mck.return_value = [{
+        "Url": "http:\/\/tinysong.com\/8We2",
+        "SongID": 269743,
+        "SongName": "The Legend Of Lil' Beethoven",
+        "ArtistID": 7620,
+        "ArtistName": "Sparks",
+        "AlbumID": 204019,
+        "AlbumName": "Sparks"
+        }, {
+        "Url": "http:\/\/tinysong.com\/abc",
+        "SongID": 2697431,
+        "SongName": "The Legend Of Lila' Beethoven",
+        "ArtistID": 76201,
+        "ArtistName": "Sparkss",
+        "AlbumID": 2040191,
+        "AlbumName": "Sparkfs"
+        }]
+            musics = models.search_songs("abc")
+            self.assertEquals(len(musics), 2)
+            self.assertEquals(len(models.Song.objects.all()), 2)
+            self.assertEquals(len(models.Album.objects.all()), 2)
+            self.assertEquals(len(models.Artist.objects.all()), 2)
