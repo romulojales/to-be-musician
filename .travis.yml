@@ -7,6 +7,6 @@ install:
   - pip install -r requirements-dev.txt --use-mirrors
   - pip install -r requirements.txt --use-mirrors
 script:
-  - coverage run --source=spriter setup.py test
+  - coverage run --source='to_be_a_musician' to_be_a_musician/manage.py test djtinysong common songs
 after_script:
   - coveralls

@@ -1,5 +1,6 @@
 to-be-musician
 ==============
+[![Build Status](https://travis-ci.org/romulojales/to-be-musician.png?branch=master)](https://travis-ci.org/romulojales/to-be-musician)
 
 `to-be-musician` is a project made in 48 hours for [Django Dash][1]. It's purpose is to automate some common tasks
 for music students, like keeping musics, search for audio, lyrics, tabs, etc.
