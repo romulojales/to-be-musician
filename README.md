@@ -37,6 +37,10 @@ Now you can run all tests:
         $ cd to_be_a_musician/
         $ python manage.py test
 
+You need to run `syncdb` with `--migrate` to create your database with all the good stuff inside:
+
+        $ python manage.py syncdb --migrate
+
 And run the Django built-in server:
 
         $ python manage.py runserver
