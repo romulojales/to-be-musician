@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from model_mommy import mommy
 from songs import models
+import mock
 
 
 class SongsBaseTestCase(TestCase):
@@ -101,3 +102,29 @@ class SongsInterpretationTestCase(SongsBaseTestCase):
     def test_string_representation(self):
         self.assertEqual(unicode(self.interpretation),
                         u"Rômulo's interpretation of Seek and Destroy (Metallica)")
+
+
+class SearchSongTests(SongsBaseTestCase):
+    @classmethod
+    def tearDownClass(cls):
+        models.Song.objects.all().delete()
+
+        models.Artist.objects.all().delete()
+        models.Album.objects.all().delete()
+
+    def test_search_song_function(self):
+        with  mock.patch("djtinysong.search_music") as mck:
+            mck.return_value = [{
+        "Url": "http:\/\/tinysong.com\/8We2",
+        "SongID": 269743,
+        "SongName": "The Legend Of Lil' Beethoven",
+        "ArtistID": 7620,
+        "ArtistName": "Sparks",
+        "AlbumID": 204019,
+        "AlbumName": "Sparks"
+        }]
+            musics = models.search_songs("abc")
+            self.assertEquals(len(musics), 1)
+            self.assertEquals(len(models.Song.objects.all()), 1)
+            self.assertEquals(len(models.Album.objects.all()), 1)
+            self.assertEquals(len(models.Artist.objects.all()), 1)
