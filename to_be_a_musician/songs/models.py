@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
@@ -35,6 +36,12 @@ class Song(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('songs_song', kwargs={
+            'artist_slug': self.artist.slug,
+            'song_slug': self.slug,
+        })
 
 
 class Interpretation(models.Model):
