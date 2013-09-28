@@ -1,13 +1,16 @@
 from django.http.response import HttpResponse
-from djtinysong import API_TINYSONG_URL
-import requests
+from .models import search_songs
 
 
 def search(request, params):
-    url = TINYSONG_URL.format(PARAMS=params)
-    response = requests.get(url)
-    return HttpResponse(response.json(), mimetype="application/json")
+    musics = search_songs(params)
+    json = []
+    for music in musics:
+        json.append({"name": music.songName,
+                     "artist": music.artistName,
+                     "url": music.get_absolute_url()})
+    return HttpResponse(json, mimetype="application/json")
 
 
-def song(requests, song_id):
+def song(requests, songId):
     pass
