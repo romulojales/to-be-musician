@@ -129,6 +129,9 @@ INSTALLED_APPS = (
 
     # Third-party apps
     'social.apps.django_app.default',
+
+    # Our apps
+    'djtinysong',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -166,3 +169,5 @@ LOGGING = {
         },
     }
 }
+
+TINYSONG_KEY = ""
