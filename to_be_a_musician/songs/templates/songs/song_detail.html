@@ -1,1 +1,6 @@
+{% load i18n %}
+
 <h1>{{ object.name }}</h1>
+
+<p>{% blocktrans with artist=object.artist.name %}Performed by {{ artist }}.{% endblocktrans %}</p>
+<p>{% blocktrans with album=object.album.name %}From {{ album }}.{% endblocktrans %}</p>
