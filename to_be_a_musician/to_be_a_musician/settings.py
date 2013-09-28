@@ -133,6 +133,7 @@ INSTALLED_APPS = (
 
     # Our apps
     'djtinysong',
+    'common',
     'songs',
 )
 

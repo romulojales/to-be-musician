@@ -1,0 +1,14 @@
+{% load i18n %}
+
+{% if q %}
+    <p>{% blocktrans %}You searched for {{ q }}!{% endblocktrans %}</p>
+{% else %}
+    <p>{% trans "You need to do a search to see anything on this page!" %}</p>
+{% endif %}
+
+{% for song in songs %}
+    <div>
+        <h3><a href="#">{{ song.songName }}</a></h3>
+        <small>{% blocktrans with artist=song.artistName album=song.albumName %}By {{ artist }}, from {{ album }}.{% endblocktrans %}</small>
+    </div>
+{% endfor %}
