@@ -4,6 +4,8 @@ to-be-musician
 `to-be-musician` is a project made in 48 hours for [Django Dash][1]. It's purpose is to automate some common tasks
 for music students, like keeping musics, search for audio, lyrics, tabs, etc.
 
+It's alive! [Check it out][2].
+
 How it works
 ------------
 
@@ -25,13 +27,14 @@ You can install `to-be-musician` cloning it from GitHub:
 
 Use pip to install all project's dependencies:
 
+        $ cd to_be_musician/
         $ pip install -r requirements-dev.txt
 
 Oh yeah! The `requirements.txt` file is only for our buddy **Heroku**.
 
 Now you can run all tests:
 
-        $ cd to_be_a_musician
+        $ cd to_be_a_musician/
         $ python manage.py test
 
 And run the Django built-in server:
@@ -41,8 +44,8 @@ And run the Django built-in server:
 Soon, we'll create a `Makefile`. That is a promise.
 
 
-Facebook authentication
------------------------
+Facebook authentication x development environ
+---------------------------------------------
 
 We are using `python-social-auth` to handle our Facebook integration.
 
@@ -56,3 +59,5 @@ Finally, you can access the application using `http://local.to-be-a-musician.her
 
   [1]: http://djangodash.com/
     "Django Dash 2013"
+  [2]: http://to-be-a-musician.herokuapp.com/
+    "Check the development evolution"
