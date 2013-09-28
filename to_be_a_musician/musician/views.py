@@ -17,3 +17,7 @@ class SongStateView(RedirectView):
 
         musician_song.state = state
         musician_song.save()
+
+# 
+# class MusicianView(TemplateView):
+#     pass
