@@ -1,13 +1,26 @@
+{% extends "base.html" %}
+
 {% load i18n %}
 
-<h1>{% blocktrans with song_name=song.name %}Your interpretation for {{ song_name }}{% endblocktrans %}</h1>
+{% block site_title %}{% trans "Send your interpretation for this song" %}{% endblock %}
 
-<form action="" method="post">
-    {% csrf_token %}
+{% block class_body %}class="internas"{% endblock %}
 
-    {{ form.as_p }}
+{% block main %}
+<div class="row">
+    <div class="interpretation-form">
+        <h2>{% blocktrans with song_name=song.name %}Your interpretation for "{{ song_name }}"{% endblocktrans %}</h2>
 
-    <p>
-        <input type="submit">
-    </p>
-</form>
+        <form action="" method="post">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <p>
+                <input type="submit" value="{% trans "Submit" %}" class="button">
+                <a href="{{ song.get_absolute_url }}">{% trans "Cancel, and go back to the song" %}</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

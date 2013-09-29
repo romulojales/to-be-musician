@@ -57,7 +57,7 @@ header {
     margin: 0 0 30px 0;
 }
 
-form {
+.search-form {
     .search-content {
         margin: 0 auto 10px auto;
         width: 80%;
@@ -120,6 +120,16 @@ form {
             }
         }
     }
+}
+
+.errorlist {
+  list-style: none;
+
+  li {
+    background: rgba(198, 15, 19, 0.1);
+    border: 1px solid #c60f13;
+    padding: 10px;
+  }
 }
 
 .search-result,

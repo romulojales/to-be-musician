@@ -7,7 +7,7 @@
 
 {% block main %}
 <div class="row">
-    <form action="{% url 'search' %}" method="get">
+    <form action="{% url 'search' %}" method="get" class="search-form">
         <p class="search-content">
             <label>{% trans "Keyword" %}:</label>
             <input type="search" name="q" placeholder="{% trans "Song, artist, album..." %}" class="input-find">
