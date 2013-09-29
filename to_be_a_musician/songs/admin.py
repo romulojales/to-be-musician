@@ -10,6 +10,10 @@ class SongAdmin(admin.ModelAdmin):
     list_display = ('name', 'artist', 'album', )
 
 
+class InterpretationAdmin(admin.ModelAdmin):
+    list_display = ('user', 'song', 'created_at', 'last_update', )
+
+
 admin.site.register(Artist, SongsBaseAdmin)
 admin.site.register(Album, SongsBaseAdmin)
 admin.site.register(Song, SongAdmin)

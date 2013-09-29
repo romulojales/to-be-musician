@@ -90,7 +90,7 @@ class SongsInterpretationTestCase(SongsBaseTestCase):
         cls.interpretation = mommy.make('songs.interpretation',
                                     song__name='Seek and Destroy',
                                     artist__name='Metallica',
-                                    user__first_name=u'Rômulo')
+                                    user__username='romulo')
 
     @classmethod
     def tearDownClass(cls):
@@ -100,8 +100,8 @@ class SongsInterpretationTestCase(SongsBaseTestCase):
         models.Song.objects.all().delete()
 
     def test_string_representation(self):
-        self.assertEqual(unicode(self.interpretation),
-                        u"Rômulo's interpretation of Seek and Destroy (Metallica)")
+        self.assertEqual(str(self.interpretation),
+                        u"romulo's interpretation of Seek and Destroy (Metallica)")
 
     def test_fill_last_update_when_saving_an_interpretation(self):
         self.interpretation.save()

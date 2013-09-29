@@ -63,10 +63,23 @@ class SongInterpretationAddViewTestCase(SongsBaseViewTestCase):
     def setUpClass(cls):
         super(SongInterpretationAddViewTestCase, cls).setUpClass()
 
+        cls.user = mommy.make('auth.user', username='test')
+        cls.user.set_password('test')
+        cls.user.save()
+
         cls.url = reverse('songs_interpretation_add', kwargs={
             'artist_slug': 'metallica',
             'song_slug': 'master-of-puppets',
         })
+
+    @classmethod
+    def tearDownClass(cls):
+        super(SongInterpretationAddViewTestCase, cls).tearDownClass()
+
+        cls.user.delete()
+
+    def setUp(self):
+        self.client.login(username='test', password='test')
 
     def test_interpretation_add_route(self):
         self.assertEqual(self.url, '/songs/metallica/master-of-puppets/interpretation/add/')
@@ -74,3 +87,20 @@ class SongInterpretationAddViewTestCase(SongsBaseViewTestCase):
     def test_song_is_in_context(self):
         response = self.client.get(self.url)
         self.assertIn('song', response.context)
+
+    def test_see_the_form_when_access_by_get(self):
+        response = self.client.get(self.url)
+        self.assertIn('form', response.context)
+
+    def test_saving_form(self):
+        response = self.client.post(self.url, {
+            'description': 'testing...',
+        })
+        interpretations = models.Interpretation.objects.filter(user=self.user)
+        self.assertEqual(len(interpretations), 1)
+
+    def test_redirect_after_save(self):
+        response = self.client.post(self.url, {
+            'description': 'testing again...',
+        })
+        self.assertRedirects(response, self.song.get_absolute_url())

@@ -57,7 +57,7 @@ class Interpretation(models.Model):
     soundcloud_url = models.URLField(_('Soundcloud URL'), blank=True, null=True)
 
     def __unicode__(self):
-        return u"{0}'s interpretation of {1} ({2})".format(self.user.first_name,
+        return u"{0}'s interpretation of {1} ({2})".format(self.user.username,
                                                            self.song.name,
                                                            self.song.artist.name)
 
