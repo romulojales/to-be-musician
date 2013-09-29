@@ -1,31 +1,41 @@
-<html>
+<!DOCTYPE HTML>
+<html lang="pt-BR">
 <head>
     {% block title %}
-    <title>To be a musician</title>
+    <title>To be musician</title>
     {% endblock title %}
     {% block css %}
+    <link rel="stylesheet" href="/static/css/foundation.css">
+        <link rel="stylesheet" href="/static/css/style.css">
     {% endblock css %}
     {% block top_js %}
     {% endblock %}
 </head>
-<body>
-    {% block user %}
-    <div class="user">
-        {% if request.user.is_authenticated %}
-        <a href="{% url 'musician_page' user_name=request.user.username %}">
-        {% if request.user.first_name  or request.user.last_name %}
-        {{request.user.first_name}} {{request.user.last_name}}
-        {% else %}
-        {{request.user.username}}
-        {% endif %}
-        </a>
-        {% else %}
-        <a href="/sign-up">Sign Up</a>
-        {% endif %}
+<body {% block class_body %}{% endblock %}>
+
+    <div class="topo">
+        <div class="row">
+            {% block user %}
+            <div class="user">
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'musician_page' user_name=request.user.username %}">
+                {% if request.user.first_name  or request.user.last_name %}
+                    {{request.user.first_name}} {{request.user.last_name}}
+                {% else %}
+                    {{request.user.username}}
+                {% endif %}
+                </a>
+                {% else %}
+                    <a href="/sign-up">Sign Up</a>
+                {% endif %}
+            </div>
+            {% endblock user %}
+        </div>
     </div>
-    {% endblock user %}
+
     {% block main %}
     {% endblock main %}
+
     {% block bottom_js %}
     {% endblock bottom_js%}
 </body>

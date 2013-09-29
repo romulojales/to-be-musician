@@ -41,6 +41,7 @@ class MusicianPageTestCase(MusicianBaseViewTestCase):
         response = self.client.get("/musician/user/test/")
         self.assertIn(self.song.name, response.content)
 
+
 class MusicianLearnRoutesTestCase(MusicianBaseViewTestCase):
 
     def test_learn_route(self):

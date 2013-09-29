@@ -1,7 +1,36 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
+{% block class_body %}class="internas"{% endblock %}
+
 {% block main %}
-    {% for song in object.song_set.all %}
-    {{song.state}} - {{song.song.name}}
-    {% endfor %}
+    <header>
+        <div class="row">
+            <h1 class="asset-logo-internas">To Be Musician</h1>
+        </div>
+    </header>
+
+    <div class="row">
+        <div class="songs will-learn">
+            <p>{% blocktrans %}Will Learn{% endblocktrans %}</p>
+            {% for song in will_learn %}
+            <a href="{{song.song.get_absolute_url}}" >{{song.song.name}}</a>
+            {% endfor %}
+        </div>
+
+        <div class="songs learning">
+            <p>{% blocktrans %}Learning{% endblocktrans %}</p>
+            {% for song in learning %}
+            <a href="{{song.song.get_absolute_url}}" >{{song.song.name}}</a>
+            {% endfor %}
+
+            <div class="songs learned">
+            <p>{% blocktrans %}Learned{% endblocktrans %}</p>
+             {% for song in  has_learned %}
+            <a href="{{song.song.get_absolute_url}}" >{{song.song.name}}</a>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}

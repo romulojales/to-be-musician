@@ -36,5 +36,8 @@ class MusicianView(DetailView):
 
     def get_context_data(self, *arg, **kwargs):
         context = super(MusicianView, self).get_context_data(**kwargs)
+        context["will_learn"] = self.object.song_set.filter(state="learn")
+        context["learning"] = self.object.song_set.filter(state="learning")
+        context["has_learned"] = self.object.song_set.filter(state="learned")
         context["request"] = self.request
         return context
