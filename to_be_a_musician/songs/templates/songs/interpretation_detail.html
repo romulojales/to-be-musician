@@ -1,24 +1,47 @@
+{% extends "base.html" %}
+
 {% load i18n %}
+{% load tinysong %}
 
-{% if user == interpretation.user %}
-    <p>
-    <a href="{% url 'songs_interpretation_edit' artist_slug=object.song.artist.slug song_slug=object.song.slug id=object.pk %}">Edit</a>
-    | <a href="{% url 'songs_interpretation_delete' artist_slug=object.song.artist.slug song_slug=object.song.slug id=object.pk %}">Delete</a>
-    </p>
-{% endif %}
+{% block site_title %}{% blocktrans with user=object.user.username song_name=object.song.name %}{{ user }}'s interpretation of {{ song_name }}{% endblocktrans %}{% endblock %}
 
-<h1>{% blocktrans with user=object.user.username song_name=object.song.name %}{{ user }}'s interpretation of {{ song_name }}{% endblocktrans %}</h1>
+{% block class_body %}class="internas"{% endblock %}
 
-<div>{{ object.description|safe }}</div>
+{% block main %}
+    <div class="row">
+        <div class="interpretation-detail">
 
-<ul>
-    {% if object.youtube_url %}
-    <li><a href="{{ object.youtube_url }}">{% trans "See on youtube" %}</a></li>
-    {% endif %}
-    {% if object.songsterr_url %}
-    <li><a href="{{ object.songsterr_url }}">{% trans "Read on Songsterr" %}</a></li>
-    {% endif %}
-    {% if object.soundcloud_url %}
-    <li><a href="{{ object.soundcloud_url }}">{% trans "Listen on Soundcloud" %}</a></li>
-    {% endif %}
-</ul>
+        <h2>{% blocktrans with user=object.user.username song_name=object.song.name %}{{ user }}'s interpretation of {{ song_name }}{% endblocktrans %}</h2>
+
+        <p>{% blocktrans with song_name=object.song.name artist_name=object.song.artist.name album_name=object.song.album.name %}
+            <strong>{{ song_name }}</strong>, by <strong>{{ artist_name }}</strong>, from <strong>{{ album_name }}</strong>.{% endblocktrans %}</p>
+
+        <p>{{ object.song.api_id|flash_player }}</p>
+
+        <ul class="references">
+            {% if object.youtube_url %}
+            <li class="reference"><a href="{{ object.youtube_url }}">{% trans "See on Youtube" %}</a></li>
+            {% endif %}
+            {% if object.songsterr_url %}
+            <li class="reference"><a href="{{ object.songsterr_url }}">{% trans "Read on Songsterr" %}</a></li>
+            {% endif %}
+            {% if object.soundcloud_url %}
+            <li class="reference"><a href="{{ object.soundcloud_url }}">{% trans "Listen on Soundcloud" %}</a></li>
+            {% endif %}
+        </ul>
+
+        <div class="interpretation-transcription">
+            <p>{{ object.description|safe }}</p>
+        </div>
+
+        <p class="button-group">
+        {% if user == interpretation.user %}
+            <a href="{% url 'songs_interpretation_edit' artist_slug=object.song.artist.slug song_slug=object.song.slug id=object.pk %}" class="button">Edit</a>
+            <a href="{% url 'songs_interpretation_delete' artist_slug=object.song.artist.slug song_slug=object.song.slug id=object.pk %}" class="button alert">Delete</a>
+        {% endif %}
+            <a href="{{ object.song.get_absolute_url }}">{% trans "Go back to the song" %}</a>
+        </p>
+
+    </div>
+</div>
+{% endblock %}

@@ -138,7 +138,8 @@ header {
   margin-bottom: 10px;
 }
 
-.interpretations {
+.interpretations,
+.references {
   list-style: none;
 }
 
@@ -149,4 +150,26 @@ header {
     display: block;
     padding: 10px 0;
   }
+}
+
+.interpretation-transcription {
+  margin-bottom: 30px;
+}
+
+.references {
+  margin-bottom: 10px;
+}
+
+.reference {
+  @include inline-block;
+  padding: 10px;
+
+  &:first-child {
+    padding-left: 0;
+  }
+}
+
+.button-group {
+  border-top: 1px dotted #ccc;
+  padding-top: 10px;
 }
