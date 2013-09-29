@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load tinysong %}
+{% load musician_extras %}
 
 {% block site_title %}{% blocktrans with user=object.user.username song_name=object.song.name %}{{ user }}'s interpretation of {{ song_name }}{% endblocktrans %}{% endblock %}
 
@@ -36,6 +37,7 @@
 
         <p class="button-group">
         {% if user == interpretation.user %}
+            {% learn_button user object.song %}
             <a href="{% url 'songs_interpretation_edit' artist_slug=object.song.artist.slug song_slug=object.song.slug id=object.pk %}" class="button">Edit</a>
             <a href="{% url 'songs_interpretation_delete' artist_slug=object.song.artist.slug song_slug=object.song.slug id=object.pk %}" class="button alert">Delete</a>
         {% endif %}
