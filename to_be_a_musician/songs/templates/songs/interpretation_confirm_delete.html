@@ -1,8 +1,25 @@
+{% extends "base.html" %}
+
 {% load i18n %}
 
-<form action="" method="post">
-    {% csrf_token %}
+{% block site_title %}{% trans "Are you sure you want to delete this interpretation?" %}{% endblock %}
 
-    <p>{% trans "Are you sure you want to delete this dude?" %}</p>
-    <input type="submit" value="{% trans "Fuck Yeah!" %}">
-</form>
+{% block class_body %}class="internas"{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="interpretation-delete">
+
+            <h2>{% blocktrans with song_name=object.song.name %}Delete your interpretation for "{{ song_name }}"{% endblocktrans %}</h2>
+
+            <form action="" method="post">
+                {% csrf_token %}
+
+                <p>{% trans "Are you sure you want to delete your interpretation for this song?" %}</p>
+
+                <input type="submit" value="{% trans "Yeah! I'm sure" %}" class="button alert">
+                <a href="{{ object.get_absolute_url }}">{% trans "Cancel, and go back to interpretation page" %}</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

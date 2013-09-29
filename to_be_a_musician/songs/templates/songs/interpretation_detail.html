@@ -14,8 +14,8 @@
 
         <h2>{% blocktrans with user=object.user.username song_name=object.song.name %}{{ user }}'s interpretation of {{ song_name }}{% endblocktrans %}</h2>
 
-        <p>{% blocktrans with song_name=object.song.name artist_name=object.song.artist.name album_name=object.song.album.name %}
-            <strong>{{ song_name }}</strong>, by <strong>{{ artist_name }}</strong>, from <strong>{{ album_name }}</strong>.{% endblocktrans %}</p>
+        <p>{% blocktrans with song_name=object.song.name song_url=object.song.get_absolute_url artist_name=object.song.artist.name album_name=object.song.album.name %}
+            <strong><a href="{{ song_url }}">{{ song_name }}</a></strong>, by <strong>{{ artist_name }}</strong>, from <strong>{{ album_name }}</strong>.{% endblocktrans %}</p>
 
         <p>{{ object.song.api_id|flash_player }}</p>
 
@@ -41,7 +41,6 @@
             <a href="{% url 'songs_interpretation_edit' artist_slug=object.song.artist.slug song_slug=object.song.slug id=object.pk %}" class="button">Edit</a>
             <a href="{% url 'songs_interpretation_delete' artist_slug=object.song.artist.slug song_slug=object.song.slug id=object.pk %}" class="button alert">Delete</a>
         {% endif %}
-            <a href="{{ object.song.get_absolute_url }}">{% trans "Go back to the song" %}</a>
         </p>
 
     </div>
