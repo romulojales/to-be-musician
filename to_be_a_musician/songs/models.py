@@ -1,7 +1,7 @@
-from datetime import datetime
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 import autoslug
 from djtinysong import search_music
@@ -49,7 +49,7 @@ class Song(models.Model):
 class Interpretation(models.Model):
     user = models.ForeignKey(User)
     song = models.ForeignKey(Song)
-    created_at = models.DateTimeField(_('Created at'), default=datetime.now)
+    created_at = models.DateTimeField(_('Created at'), default=timezone.now)
     last_update = models.DateTimeField(_('Last update'), blank=True, null=True)
     description = models.TextField(_('Description'), blank=True, null=True)
     youtube_url = models.URLField(_('Youtube URL'), blank=True, null=True)
@@ -62,7 +62,7 @@ class Interpretation(models.Model):
                                                            self.song.artist.name)
 
     def save(self, *args, **kwargs):
-        self.last_update = datetime.now()
+        self.last_update = timezone.now()
         return super(Interpretation, self).save(*args, **kwargs)
 
 
