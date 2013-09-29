@@ -32,7 +32,7 @@ class MusicianView(DetailView):
     template_name = "musician.html"
 
     def get_object(self):
-        return self.request.user
+        return get_object_or_404(User, username=self.kwargs['user_name'])
 
     def get_context_data(self, *arg, **kwargs):
         context = super(MusicianView, self).get_context_data(**kwargs)
