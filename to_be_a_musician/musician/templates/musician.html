@@ -6,25 +6,26 @@
 
 {% block main %}
     <div class="row">
-        <div class="songs will-learn">
-            <p>{% blocktrans %}Will Learn{% endblocktrans %}</p>
+        <section class="four columns songs will-learn">
+            <h4 class="songs-column-title">{% blocktrans %}Will learn{% endblocktrans %}</h4>
             {% for song in will_learn %}
-            <a href="{{song.song.get_absolute_url}}" >{{song.song.name}}</a>
+                <a href="{{ song.song.get_absolute_url }}" class="song-item" >{{ song.song.name }} ({{ song.song.artist }})</a>
             {% endfor %}
-        </div>
+        </section>
 
-        <div class="songs learning">
-            <p>{% blocktrans %}Learning{% endblocktrans %}</p>
+        <section class="four columns songs learning">
+            <h4 class="songs-column-title">{% blocktrans %}Learning{% endblocktrans %}</h4>
             {% for song in learning %}
-            <a href="{{song.song.get_absolute_url}}" >{{song.song.name}}</a>
+                <a href="{{ song.song.get_absolute_url }}" class="song-item" >{{song.song.name}} ({{ song.song.artist }})</a>
             {% endfor %}
+        </section>
 
-            <div class="songs learned">
-            <p>{% blocktrans %}Learned{% endblocktrans %}</p>
+        <section class="four columns songs learned">
+            <h4 class="songs-column-title">{% blocktrans %}Learned{% endblocktrans %}</h4>
              {% for song in  has_learned %}
-            <a href="{{song.song.get_absolute_url}}" >{{song.song.name}}</a>
+                <a href="{{ song.song.get_absolute_url }}" class="song-item" >{{ song.song.name }} ({{ song.song.artist }})</a>
             {% endfor %}
-        </div>
+        </section>
     </div>
 
 {% endblock %}
