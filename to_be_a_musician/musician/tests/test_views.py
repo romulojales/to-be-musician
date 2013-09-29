@@ -1,7 +1,9 @@
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.test import TestCase
+
 from model_mommy import mommy
 from musician import models
+from musician.models import Song
 
 
 class MusicianBaseViewTestCase(TestCase):
@@ -25,6 +27,19 @@ class MusicianBaseViewTestCase(TestCase):
             'state': state,
         })
 
+
+class MusicianPageTestCase(MusicianBaseViewTestCase):
+    def setUp(self):
+        self.client.login(username='test', password='test')
+        self.s = Song(user=self.user, song=self.song, state="learn")
+        self.s.save()
+
+    def tearDown(self):
+        self.s.delete()
+
+    def test_render_musics(self):
+        response = self.client.get("/musician/user/test/")
+        self.assertIn(self.song.name, response.content)
 
 class MusicianLearnRoutesTestCase(MusicianBaseViewTestCase):
 
@@ -51,7 +66,6 @@ class MusicianChangeLearningStateTestCase(MusicianBaseViewTestCase):
 
     def test_will_learn_a_song_state(self):
         response = self.client.get(self.get_route('learn'))
-
         try:
             song = models.Song.objects.get(user=self.user, song=self.song,
                                            state='learn')
@@ -83,9 +97,7 @@ class MusicianChangeLearningStateTestCase(MusicianBaseViewTestCase):
     def test_dont_duplicate_a_musician_song(self):
         self.client.get(self.get_route('learn'))
         self.client.get(self.get_route('learn'))
-
         songs = models.Song.objects.all()
-
         self.assertEqual(len(songs), 1)
 
     def test_dont_duplication_a_musician_song_with_different_states(self):
