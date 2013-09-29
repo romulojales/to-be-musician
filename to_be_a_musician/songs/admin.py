@@ -1,5 +1,5 @@
 from django.contrib import admin
-from songs.models import Artist, Album, Song
+from songs.models import Artist, Album, Song, Interpretation
 
 
 class SongsBaseAdmin(admin.ModelAdmin):
@@ -13,3 +13,4 @@ class SongAdmin(admin.ModelAdmin):
 admin.site.register(Artist, SongsBaseAdmin)
 admin.site.register(Album, SongsBaseAdmin)
 admin.site.register(Song, SongAdmin)
+admin.site.register(Interpretation)
