@@ -19,7 +19,7 @@
             {% block user %}
             <div class="user">
                 {% if user.is_authenticated %}
-                <a href="{% url 'musician_page' user_name=request.user.username %}">
+                <a href="{% url 'musician_page' user_name=user.username %}">
                     {% if user.first_name  or user.last_name %}
                         {{ user.first_name }} {{ user.last_name }}
                     {% else %}
