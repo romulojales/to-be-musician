@@ -33,12 +33,13 @@ class MusicianPageTestCase(MusicianBaseViewTestCase):
         self.client.login(username='test', password='test')
         self.s = Song(user=self.user, song=self.song, state="learn")
         self.s.save()
+
     def tearDown(self):
         self.s.delete()
 
     def test_render_musics(self):
         response = self.client.get("/musician/user/test/")
-        import pdb;pdb.set_trace()
+        self.assertIn(self.song.name, response.content)
 
 class MusicianLearnRoutesTestCase(MusicianBaseViewTestCase):
 
