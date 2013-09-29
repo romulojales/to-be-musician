@@ -12,7 +12,7 @@ class Artist(models.Model):
     api_id = models.CharField(_('API ID'), max_length=100, blank=True,
                               null=True, db_index=True)
     name = models.CharField(_('Name'), max_length=255)
-    slug = autoslug.AutoSlugField(populate_from='name')
+    slug = autoslug.AutoSlugField(populate_from='name', unique=False)
 
     def __unicode__(self):
         return self.name
@@ -22,7 +22,7 @@ class Album(models.Model):
     api_id = models.CharField(_('API ID'), max_length=100, blank=True,
                               null=True, db_index=True)
     name = models.CharField(_('Name'), max_length=255)
-    slug = autoslug.AutoSlugField(populate_from='name')
+    slug = autoslug.AutoSlugField(populate_from='name', unique=False)
 
     def __unicode__(self):
         return self.name
@@ -35,7 +35,7 @@ class Song(models.Model):
     album = models.ForeignKey(Album)
     name = models.CharField(_('Name'), max_length=255)
     tinysong_url = models.URLField('Tinysong URL')
-    slug = autoslug.AutoSlugField(populate_from='name')
+    slug = autoslug.AutoSlugField(populate_from='name', unique=False)
 
     def __unicode__(self):
         return self.name
