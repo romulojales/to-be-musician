@@ -6,3 +6,5 @@
 .sass-cache
 local_settings.py
 db.sqlite3
+.coverage
+.settings
