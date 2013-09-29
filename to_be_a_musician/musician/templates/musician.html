@@ -14,14 +14,12 @@
     <div class="songs learning">
     <p>{% blocktrans %}Learning{% endblocktrans %}</p>
     {% for song in learning %}
-    {% blocktrans %}Learning{% endblocktrans %}
     <a href="{{song.song.get_absolute_url}}" >{{song.song.name}}</a>
     {% endfor %}
     
     <div class="songs learned">
     <p>{% blocktrans %}Learned{% endblocktrans %}</p>
      {% for song in  has_learned %}
-    {% blocktrans %} Has Learned{% endblocktrans %}
     <a href="{{song.song.get_absolute_url}}" >{{song.song.name}}</a>
     {% endfor %}
      </div>
