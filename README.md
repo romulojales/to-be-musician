@@ -50,8 +50,8 @@ And run the Django built-in server:
 Soon, we'll create a `Makefile`. That is a promise.
 
 
-Facebook authentication x development environ
----------------------------------------------
+Facebook authentication x development environment
+-------------------------------------------------
 
 We are using `python-social-auth` to handle our Facebook integration.
 
