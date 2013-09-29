@@ -1,0 +1,63 @@
+@import "compass/css3";
+@import "_base";
+
+/* Assets */
+@import "_sprites";
+@include all-asset-sprites;
+
+body {
+    background: #000;
+
+    &.internas {
+        background: #FFF;
+    }
+}
+
+.topo {
+    background: $corPrincipal;
+    border-bottom: 1px solid $corSecundaria;
+    margin: 0;
+    height: 30px;
+
+    p,
+    .user {
+        color: #FFF;
+        line-height: 30px;
+        margin: 0;
+        text-align: right;
+
+        a {
+            color: $corSecundaria;
+
+            &:hover {
+                color: #FFF;
+            }
+        }
+    }
+}
+
+h1 {
+    display: block;
+    height: 115px;
+    margin: 40px auto;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 365px;
+}
+
+header {
+    background: #000;
+    margin: 0 0 30px 0;
+}
+
+
+// INTERNAS
+.internas {
+    header {
+        h1 {
+            height: 80px;
+            margin: 15px 0;
+            width: 250px;
+        }
+    }
+}

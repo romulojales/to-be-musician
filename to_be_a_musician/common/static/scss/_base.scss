@@ -1,0 +1,6 @@
+$corPrincipal: #331133;
+$corSecundaria: #993399;
+
+a {
+    @include transition(all, 0.3s);
+}
