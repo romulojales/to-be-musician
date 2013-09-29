@@ -136,3 +136,59 @@ class SongInterpretationDetailViewTestCase(SongsBaseViewTestCase):
         response = self.client.get(self.url)
         self.assertIn('object', response.context)
         self.assertEqual(response.context['object'], self.interpretation)
+
+
+class SongInterpretationUpdateViewTestCase(SongsBaseViewTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(SongInterpretationUpdateViewTestCase, cls).setUpClass()
+
+        cls.user = mommy.make('auth.user', username='test')
+        cls.user.set_password('test')
+        cls.user.save()
+
+        cls.interpretation = mommy.make('songs.interpretation',
+                                        song=cls.song, user=cls.user)
+
+        cls.url = reverse('songs_interpretation_edit', kwargs={
+            'artist_slug': 'metallica',
+            'song_slug': 'master-of-puppets',
+            'id': cls.interpretation.pk,
+        })
+
+    @classmethod
+    def tearDownClass(cls):
+        super(SongInterpretationUpdateViewTestCase, cls).tearDownClass()
+
+        cls.interpretation.user.delete()
+        cls.interpretation.delete()
+
+    def setUp(self):
+        self.client.login(username='test', password='test')
+
+    def test_interpretation_edit_route(self):
+        expected_route = "/songs/metallica/master-of-puppets/interpretation/{0}/edit/".format(self.interpretation.pk)
+        self.assertEqual(self.url, expected_route)
+
+    def test_song_is_in_context(self):
+        response = self.client.get(self.url)
+        self.assertIn('song', response.context)
+
+    def test_see_the_form_when_access_by_get(self):
+        response = self.client.get(self.url)
+        self.assertIn('form', response.context)
+
+    def test_saving_form(self):
+        response = self.client.post(self.url, {
+            'description': 'updating...',
+        })
+        updated_interpretation = (models.Interpretation
+                                  .objects.get(pk=self.interpretation.pk))
+        self.assertEqual(updated_interpretation.description, 'updating...')
+
+    def test_redirect_after_save(self):
+        response = self.client.post(self.url, {
+            'description': 'testing again...',
+        })
+        self.assertRedirects(response, self.interpretation.get_absolute_url())
