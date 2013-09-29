@@ -192,3 +192,50 @@ class SongInterpretationUpdateViewTestCase(SongsBaseViewTestCase):
             'description': 'testing again...',
         })
         self.assertRedirects(response, self.interpretation.get_absolute_url())
+
+
+class SongInterpretationDeleteViewTestCase(SongsBaseViewTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(SongInterpretationDeleteViewTestCase, cls).setUpClass()
+
+        cls.user = mommy.make('auth.user', username='test')
+        cls.user.set_password('test')
+        cls.user.save()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(SongInterpretationDeleteViewTestCase, cls).tearDownClass()
+        cls.user.delete()
+
+    def setUp(self):
+        self.interpretation = mommy.make('songs.interpretation',
+                                          song=self.song, user=self.user)
+
+        self.url = reverse('songs_interpretation_delete', kwargs={
+            'artist_slug': 'metallica',
+            'song_slug': 'master-of-puppets',
+            'id': self.interpretation.pk,
+        })
+        self.client.login(username='test', password='test')
+
+    def tearDown(self):
+        self.interpretation.delete()
+
+    def test_interpretation_delete_route(self):
+        expected_route = "/songs/metallica/master-of-puppets/interpretation/{0}/delete/".format(self.interpretation.pk)
+        self.assertEqual(self.url, expected_route)
+
+    def test_song_is_in_context(self):
+        response = self.client.get(self.url)
+        self.assertIn('song', response.context)
+
+    def test_delete_after_confirm_the_operation(self):
+        response = self.client.post(self.url)
+        interpretations = models.Interpretation.objects.all()
+        self.assertFalse(len(interpretations))
+
+    def test_redirect_to_song_page_after_deleting(self):
+        response = self.client.post(self.url)
+        self.assertRedirects(response, '/songs/metallica/master-of-puppets/')

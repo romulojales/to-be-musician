@@ -3,7 +3,7 @@
 {% if user == interpretation.user %}
     <p>
     <a href="{% url 'songs_interpretation_edit' artist_slug=object.song.artist.slug song_slug=object.song.slug id=object.pk %}">Edit</a>
-    | <a href="#">Delete</a>
+    | <a href="{% url 'songs_interpretation_delete' artist_slug=object.song.artist.slug song_slug=object.song.slug id=object.pk %}">Delete</a>
     </p>
 {% endif %}
 

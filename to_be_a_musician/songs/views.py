@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from songs.forms import InterpretationForm
 from songs.models import Interpretation, Song
 
@@ -88,6 +88,20 @@ class InterpretationUpdateView(SongsGetSongObjectMixin, SongsGetObjectMixin, Upd
         song = self.get_song_object()
         self.object = form.save(user=self.request.user, song=song)
         return HttpResponseRedirect(self.object.get_absolute_url())
+
+
+class InterpretationDeleteView(SongsGetSongObjectMixin, SongsGetObjectMixin, DeleteView):
+    model = Interpretation
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(InterpretationDeleteView, self).get_context_data(**kwargs)
+        context['song'] = self.get_song_object()
+
+        return context
+
+    def get_success_url(self):
+        song = self.get_song_object()
+        return song.get_absolute_url()
 
 
 class InterpretationView(SongsGetObjectMixin, DetailView):
