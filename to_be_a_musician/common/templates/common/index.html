@@ -21,12 +21,12 @@
 
 <div class="row">
     <form action="{% url 'search' %}" method="get">
-        <p>
-            <label>{% trans "Keyword" %}:
-                <input type="search" name="q" placeholder="{% trans "Song, artist, album..." %}"></label>
+        <p class="search-content">
+            <label>{% trans "Keyword" %}:</label>
+            <input type="search" name="q" placeholder="{% trans "Song, artist, album..." %}" class="input-find">
         </p>
 
-        <input type="submit">
+        <input class="button" type="submit" value="search">
     </form>
 </div>
 {% endblock %}

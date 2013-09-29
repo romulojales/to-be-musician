@@ -50,6 +50,33 @@ header {
     margin: 0 0 30px 0;
 }
 
+form {
+    .search-content {
+        float: left;
+        margin-left: 100px;
+    }
+
+    input.input-find {
+        @include border-radius(10px);
+        color: #331133;
+        font-family: arial;
+        font-size: 20px;
+        font-weight: bold;
+        height: auto;
+        margin: 0 auto;
+        padding: 10px;
+        text-transform: uppercase;
+        width: 600px;
+    }
+    input[type=submit] {
+        @include border-radius(10px);
+        margin: 0 0 0 20px;
+        font-size: 20px;
+    }
+    label {
+        display: none;
+    }
+}
 
 // INTERNAS
 .internas {
