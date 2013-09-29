@@ -59,8 +59,8 @@ header {
 
 form {
     .search-content {
-        float: left;
-        margin-left: 100px;
+        margin: 0 auto 10px auto;
+        width: 80%;
     }
 
     input.input-find {
@@ -74,7 +74,7 @@ form {
         margin: 0 auto;
         padding: 10px;
         text-transform: uppercase;
-        width: 600px;
+        width: 80%;
         outline: none;
 
         &:active,
@@ -86,7 +86,8 @@ form {
         @include border-radius(10px);
         background-color: $corPrincipal;
         border: 1px solid $corSecundaria;
-        margin: 3px 0 0 20px;
+        display: block;
+        margin: 3px auto 0 auto;
         font-size: 20px;
 
         &:hover {
@@ -95,6 +96,12 @@ form {
     }
     label {
         display: none;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    input[type="submit"].button {
+        width: 60%;
     }
 }
 
