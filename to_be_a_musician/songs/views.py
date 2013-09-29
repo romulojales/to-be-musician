@@ -45,3 +45,19 @@ class InterpretationCreateView(CreateView):
         song = get_object_or_404(Song, slug=song_slug,
                                  artist__slug=artist_slug)
         return song
+
+
+class InterpretationView(DetailView):
+    model = Interpretation
+
+    def get_object(self, queryset=None):
+        if not queryset:
+            queryset = self.get_queryset()
+
+        artist_slug = self.kwargs['artist_slug']
+        song_slug = self.kwargs['song_slug']
+        interpretation_id = self.kwargs['id']
+
+        return get_object_or_404(queryset, id=interpretation_id,
+                                 song__slug=song_slug,
+                                 song__artist__slug=artist_slug)

@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<h1>{% blocktrans with user=object.user.username song_name=object.song.name %}{{ user }}'s interpretation of {{ song_name }}{% endblocktrans %}</h1>
+
+<div>{{ object.description|safe }}</div>
+
+<ul>
+    {% if object.youtube_url %}
+    <li><a href="{{ object.youtube_url }}">{% trans "See on youtube" %}</a></li>
+    {% endif %}
+    {% if object.songsterr_url %}
+    <li><a href="{{ object.songsterr_url }}">{% trans "Read on Songsterr" %}</a></li>
+    {% endif %}
+    {% if object.soundcloud_url %}
+    <li><a href="{{ object.soundcloud_url }}">{% trans "Listen on Soundcloud" %}</a></li>
+    {% endif %}
+</ul>

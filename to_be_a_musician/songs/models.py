@@ -64,6 +64,13 @@ class Interpretation(models.Model):
                                                            self.song.name,
                                                            self.song.artist.name)
 
+    def get_absolute_url(self):
+        return reverse('songs_interpretation_detail', kwargs={
+            'artist_slug': self.song.artist.slug,
+            'song_slug': self.song.slug,
+            'id': self.pk,
+        })
+
     def save(self, *args, **kwargs):
         self.last_update = timezone.now()
         return super(Interpretation, self).save(*args, **kwargs)

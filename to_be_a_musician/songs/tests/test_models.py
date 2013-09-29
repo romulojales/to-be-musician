@@ -113,6 +113,10 @@ class SongsInterpretationTestCase(SongsBaseTestCase):
         self.assertEqual(str(self.interpretation),
                         u"romulo's interpretation of Seek and Destroy (Metallica)")
 
+    def test_get_absolute_url(self):
+        url = self.interpretation.get_absolute_url()
+        self.assertEqual(url, '/songs/metallica/seek-and-destroy/interpretation/1/')
+
     def test_fill_last_update_when_saving_an_interpretation(self):
         self.interpretation.save()
         self.assertTrue(self.interpretation.last_update)

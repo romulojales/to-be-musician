@@ -33,7 +33,7 @@
             <ul>
                 {% for interpretation in last_interpretations %}
                 <li>
-                    <a href="#">
+                    <a href="{{ interpretation.get_absolute_url }}">
                         {% blocktrans with user=interpretation.user.username created_at=interpretation.created_at %}
                         Uploaded by {{ user }} at {{ created_at }}{% endblocktrans %}</a>
                 </li>

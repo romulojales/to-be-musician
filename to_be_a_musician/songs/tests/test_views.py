@@ -104,3 +104,35 @@ class SongInterpretationAddViewTestCase(SongsBaseViewTestCase):
             'description': 'testing again...',
         })
         self.assertRedirects(response, self.song.get_absolute_url())
+
+
+class SongInterpretationDetailViewTestCase(SongsBaseViewTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(SongInterpretationDetailViewTestCase, cls).setUpClass()
+
+        cls.interpretation = mommy.make('songs.interpretation',
+                                        song=cls.song)
+
+        cls.url = reverse('songs_interpretation_detail', kwargs={
+            'artist_slug': 'metallica',
+            'song_slug': 'master-of-puppets',
+            'id': cls.interpretation.pk,
+        })
+
+    @classmethod
+    def tearDownClass(cls):
+        super(SongInterpretationDetailViewTestCase, cls).tearDownClass()
+
+        cls.interpretation.user.delete()
+        cls.interpretation.delete()
+
+    def test_interpretation_detail_route(self):
+        expected_route = "/songs/metallica/master-of-puppets/interpretation/{0}/".format(self.interpretation.pk)
+        self.assertEqual(self.url, expected_route)
+
+    def test_object_is_in_context(self):
+        response = self.client.get(self.url)
+        self.assertIn('object', response.context)
+        self.assertEqual(response.context['object'], self.interpretation)
