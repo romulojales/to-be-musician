@@ -1,9 +1,7 @@
-#/ Django settings for to_be_a_musician project.
-
 import os
 from unipath import Path
 
-PROJECT_ROOT_PATH = Path(__file__).parent
+PROJECT_ROOT_PATH = Path(__file__).parent.parent
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -12,18 +10,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
-DATABASES = {}
-
-if os.environ.get('DATABASE_URL'):
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config()
-else:
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': PROJECT_ROOT_PATH.child('db.sqlite3'),
-        'TEST_NAME': PROJECT_ROOT_PATH.child('db-test.sqlite3'),
-    }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -87,7 +73,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '*nc@mszc4=r5o4e^%pbh0*$*oqamb$o^wbq#a6#^f=3fpgqvs5'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '*nc@mszc4=r5o4e^%pbh0*$*oqamb$o^wbq#a6#^f=3fpgqvs5')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -141,11 +127,6 @@ INSTALLED_APPS = (
 
 #SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
-AUTHENTICATION_BACKENDS = (
-    'social.backends.facebook.FacebookOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -175,19 +156,17 @@ LOGGING = {
     }
 }
 
-TINYSONG_KEY = "1dbea9a0d261b0e1c2c738bd456dd751"# os.environ.get('TINYSONG_KEY')
+# Auth configuration
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FACEBOOK_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FACEBOOK_SECRET')
-
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
-SOUTH_TESTS_MIGRATE = False
-
-def gen_func():
-    return None
-
-MOMMY_CUSTOM_FIELDS_GEN = {
-    'autoslug.fields.AutoSlugField': gen_func,
-}
+# Tinysong integration
+TINYSONG_KEY = os.environ.get('TINYSONG_KEY', '1dbea9a0d261b0e1c2c738bd456dd751')
