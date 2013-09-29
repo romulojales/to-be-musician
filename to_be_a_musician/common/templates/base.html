@@ -26,6 +26,7 @@
                         {{ user.username }}
                     {% endif %}
                 </a>
+                <a href="{% url 'logout' %}">{% trans "logout" %}</a>
                 {% else %}
                     <a href="{% url 'social:begin' backend="facebook" %}">{% trans "Sign up" %}</a>
                 {% endif %}
