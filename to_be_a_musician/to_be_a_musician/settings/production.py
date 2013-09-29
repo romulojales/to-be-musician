@@ -15,3 +15,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     PROJECT_ROOT_PATH.child('static'),
 )
+
+DEBUG=False
