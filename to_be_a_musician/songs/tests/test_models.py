@@ -82,6 +82,16 @@ class SongsSongTestCase(SongsBaseTestCase):
         })
         self.assertEqual(self.song.get_absolute_url(), expected_url)
 
+    def test_get_last_interpretations_for_this_song(self):
+        interpretations = []
+        for i in xrange(10):
+            interpretations.append(mommy.make('songs.interpretation', song=self.song))
+
+        song_interpretations = self.song.last_interpretations()
+
+        self.assertEqual(song_interpretations[0], interpretations[-1])
+        self.assertEqual(song_interpretations[9], interpretations[0])
+
 
 class SongsInterpretationTestCase(SongsBaseTestCase):
 

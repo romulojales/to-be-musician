@@ -27,5 +27,19 @@
         <p><a
             href="{% url 'songs_interpretation_add' artist_slug=object.artist.slug song_slug=object.slug %}">{% trans "Send your interpretation of this song" %}</a>
         </p>
+
+        {% with last_interpretations=object.last_interpretations %}
+            {% if last_interpretations %}
+            <ul>
+                {% for interpretation in last_interpretations %}
+                <li>
+                    <a href="#">
+                        {% blocktrans with user=interpretation.user.username created_at=interpretation.created_at %}
+                        Uploaded by {{ user }} at {{ created_at }}{% endblocktrans %}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
     </div>
 {% endblock %}

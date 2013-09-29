@@ -45,6 +45,9 @@ class Song(models.Model):
             'song_slug': self.slug,
         })
 
+    def last_interpretations(self):
+        return self.interpretation_set.order_by('-created_at')[:10]
+
 
 class Interpretation(models.Model):
     user = models.ForeignKey(User)
