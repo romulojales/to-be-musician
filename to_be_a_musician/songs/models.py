@@ -1,7 +1,8 @@
+from datetime import datetime
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 import autoslug
 from djtinysong import search_music
 
@@ -48,11 +49,21 @@ class Song(models.Model):
 class Interpretation(models.Model):
     user = models.ForeignKey(User)
     song = models.ForeignKey(Song)
+    created_at = models.DateTimeField(_('Created at'), default=datetime.now)
+    last_update = models.DateTimeField(_('Last update'), blank=True, null=True)
+    description = models.TextField(_('Description'), blank=True, null=True)
+    youtube_url = models.URLField(_('Youtube URL'), blank=True, null=True)
+    songsterr_url = models.URLField(_('Songsterr URL'), blank=True, null=True)
+    soundcloud_url = models.URLField(_('Soundcloud URL'), blank=True, null=True)
 
     def __unicode__(self):
         return u"{0}'s interpretation of {1} ({2})".format(self.user.first_name,
                                                            self.song.name,
                                                            self.song.artist.name)
+
+    def save(self, *args, **kwargs):
+        self.last_update = datetime.now()
+        return super(Interpretation, self).save(*args, **kwargs)
 
 
 def search_songs(argument, page=1):
