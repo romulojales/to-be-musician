@@ -21,5 +21,6 @@ urlpatterns = patterns('',
     url(r"{0}/interpretation/(?P<id>\d+)/delete/$".format(SONG_URL_PATTERN),
         interpretation_delete_view, name='songs_interpretation_delete'),
 
-    url(r"{0}/$".format(SONG_URL_PATTERN), SongView.as_view(), name='songs_song'),
+    url(r"{0}/$".format(SONG_URL_PATTERN), SongView.as_view(),
+        name='songs_song'),
 )

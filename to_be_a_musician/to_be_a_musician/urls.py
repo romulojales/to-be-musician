@@ -11,10 +11,7 @@ urlpatterns = patterns('',
     url(r'^search/$', SearchView.as_view(), name='search'),
     url(r'^songs/', include('songs.urls')),
     url(r'^musician/', include('musician.urls')),
-
-
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
     url('', include('social.apps.django_app.urls', namespace='social')),
-
     url(r'^admin/', include(admin.site.urls)),
 )
