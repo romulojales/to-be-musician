@@ -15,4 +15,6 @@
 <p>{% blocktrans with artist=object.artist.name %}Performed by {{ artist }}.{% endblocktrans %}</p>
 <p>{% blocktrans with album=object.album.name %}From {{ album }}.{% endblocktrans %}</p>
 <p>{{object.api_id|flash_player}}</p>
+
+<p><a href="#">{% trans "Add your interpretation of this song" %}</a></p>
 {% endblock %}

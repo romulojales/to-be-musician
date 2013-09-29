@@ -4,7 +4,7 @@ from model_mommy import mommy
 from songs import models, views
 
 
-class SongsSongViewTestCase(TestCase):
+class SongsBaseViewTestCase(TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -13,16 +13,24 @@ class SongsSongViewTestCase(TestCase):
         cls.song = mommy.make('songs.song', name='Master of Puppets',
                               artist=cls.artist, album=cls.album)
 
-        cls.url = reverse('songs_song', kwargs={
-            'artist_slug': 'metallica',
-            'song_slug': 'master-of-puppets',
-        })
-
     @classmethod
     def tearDownClass(cls):
         cls.artist.delete()
         cls.album.delete()
         cls.song.delete()
+
+
+class SongsSongViewTestCase(SongsBaseViewTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(SongsSongViewTestCase, cls).setUpClass()
+
+        cls.url = reverse('songs_song', kwargs={
+            'artist_slug': 'metallica',
+            'song_slug': 'master-of-puppets',
+        })
+
 
     def setUp(self):
         self.response = self.client.get(self.url)
@@ -47,3 +55,22 @@ class SongSongView404TestCase(TestCase):
         response = self.client.get(route)
 
         self.assertEqual(response.status_code, 404)
+
+
+class SongInterpretationAddViewTestCase(SongsBaseViewTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(SongInterpretationAddViewTestCase, cls).setUpClass()
+
+        cls.url = reverse('songs_interpretation_add', kwargs={
+            'artist_slug': 'metallica',
+            'song_slug': 'master-of-puppets',
+        })
+
+    def test_interpretation_add_route(self):
+        self.assertEqual(self.url, '/songs/metallica/master-of-puppets/interpretation/add/')
+
+    def test_song_is_in_context(self):
+        response = self.client.get(self.url)
+        self.assertIn('song', response.context)

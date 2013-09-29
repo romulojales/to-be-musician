@@ -1,7 +1,10 @@
 from django.conf.urls import patterns, url
-from django.views.generic.base import TemplateView
-from songs.views import SongView
+from songs.views import InterpretationCreateView, SongView
+
+SONG_URL_PATTERN = '(?P<artist_slug>[\w_-]+)/(?P<song_slug>[\w_-]+)'
 
 urlpatterns = patterns('',
-    url('(?P<artist_slug>[\w_-]+)/(?P<song_slug>[\w_-]+)/$', SongView.as_view(), name='songs_song'),
+    url(r"{0}/interpretation/add/$".format(SONG_URL_PATTERN),
+        InterpretationCreateView.as_view(), name='songs_interpretation_add'),
+    url(r"{0}/$".format(SONG_URL_PATTERN), SongView.as_view(), name='songs_song'),
 )
