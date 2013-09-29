@@ -170,3 +170,4 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 # Tinysong integration
 TINYSONG_KEY = os.environ.get('TINYSONG_KEY', '1dbea9a0d261b0e1c2c738bd456dd751')
+LOGIN_URL = "/login/facebook"
