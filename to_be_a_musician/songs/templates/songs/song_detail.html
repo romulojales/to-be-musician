@@ -30,12 +30,14 @@
 
         {% with last_interpretations=object.last_interpretations %}
             {% if last_interpretations %}
-            <ul>
+            <h3>{% trans "Interpretations" %}</h3>
+
+            <ul class="interpretations">
                 {% for interpretation in last_interpretations %}
-                <li>
+                <li class="interpretation-item">
                     <a href="{{ interpretation.get_absolute_url }}">
-                        {% blocktrans with user=interpretation.user.username created_at=interpretation.created_at %}
-                        Uploaded by {{ user }} at {{ created_at }}{% endblocktrans %}</a>
+                        {% blocktrans with user=interpretation.user.username created_at=interpretation.created_at|timesince %}
+                        By <strong>{{ user }}</strong> at {{ created_at }}{% endblocktrans %}</a>
                 </li>
                 {% endfor %}
             </ul>

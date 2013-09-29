@@ -127,3 +127,16 @@ form {
   border-bottom: 1px dotted #ccc;
   margin-bottom: 10px;
 }
+
+.interpretations {
+  list-style: none;
+}
+
+.interpretation-item {
+  border-bottom: 1px solid #ccc;
+
+  a {
+    display: block;
+    padding: 10px 0;
+  }
+}
