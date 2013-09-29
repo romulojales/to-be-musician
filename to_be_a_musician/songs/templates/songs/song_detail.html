@@ -4,15 +4,11 @@
 {% load tinysong %}
 {% load musician_extras %}
 
+{% block site_title %}{{ object.name }} - {{ object.artist }}{% endblock %}
+
 {% block class_body %}class="internas"{% endblock %}
 
 {% block main %}
-    <header>
-        <div class="row">
-            <h1 class="asset-logo-internas">To Be Musician</h1>
-        </div>
-    </header>
-
     <div class="row">
         <h2>{{ object.name }}</h2>
 

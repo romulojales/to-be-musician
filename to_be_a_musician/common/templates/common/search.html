@@ -3,19 +3,14 @@
 {% load i18n %}
 {% load tinysong %}
 
+{% block site_title %}{% blocktrans %}Results for "{{ q }}"{% endblocktrans %}{% endblock %}
+
 {% block class_body %}class="internas"{% endblock %}
 
 {% block main %}
-
-    <header>
-        <div class="row">
-            <h1 class="asset-logo-internas"><a href="/">To Be Musician</a></h1>
-        </div>
-    </header>
-
     <div class="row">
         {% if q %}
-            <p>{% blocktrans %}You searched for {{ q }}!{% endblocktrans %}</p>
+            <p>{% blocktrans %}Results for <strong>"{{ q }}"</strong>!{% endblocktrans %}</p>
         {% else %}
             <p>{% trans "You need to do a search to see anything on this page!" %}</p>
         {% endif %}

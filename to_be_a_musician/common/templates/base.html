@@ -1,15 +1,16 @@
+{% load i18n %}
+
 <!DOCTYPE HTML>
 <html lang="pt-BR">
 <head>
-    {% block title %}
-    <title>To be musician</title>
-    {% endblock title %}
+<title>{% block site_title_wrap %}{% block site_title %}{% trans "Learn and teach some awesome songs!" %}{% endblock %} | To be musician{% endblock %}</title>
+
     {% block css %}
-    <link rel="stylesheet" href="/static/css/foundation.css">
-        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/foundation.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
     {% endblock css %}
-    {% block top_js %}
-    {% endblock %}
+
+    {% block top_js %}{% endblock %}
 </head>
 <body {% block class_body %}{% endblock %}>
 
@@ -17,21 +18,29 @@
         <div class="row">
             {% block user %}
             <div class="user">
-                {% if request.user.is_authenticated %}
-                    <a href="{% url 'musician_page' user_name=request.user.username %}">
-                {% if request.user.first_name  or request.user.last_name %}
-                    {{request.user.first_name}} {{request.user.last_name}}
-                {% else %}
-                    {{request.user.username}}
-                {% endif %}
+                {% if user.is_authenticated %}
+                <a href="{% url 'musician_page' user_name=request.user.username %}">
+                    {% if user.first_name  or user.last_name %}
+                        {{ user.first_name }} {{ user.last_name }}
+                    {% else %}
+                        {{ user.username }}
+                    {% endif %}
                 </a>
                 {% else %}
-                    <a href="/sign-up">Sign Up</a>
+                    <a href="{% url 'social:begin' backend="facebook" %}">{% trans "Sign up" %}</a>
                 {% endif %}
             </div>
             {% endblock user %}
         </div>
     </div>
+
+    {% block header %}
+        <header>
+            <div class="row">
+                <h1 class="asset-logo-internas"><a href="{% url 'home' %}">To Be Musician</a></h1>
+            </div>
+        </header>
+    {% endblock %}
 
     {% block main %}
     {% endblock main %}
