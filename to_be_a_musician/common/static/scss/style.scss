@@ -13,6 +13,10 @@ body {
     }
 }
 
+.facebook-login {
+    display: none;
+}
+
 .topo {
     background: $corPrincipal;
     border-bottom: 1px solid $corSecundaria;
@@ -33,6 +37,9 @@ body {
                 color: #FFF;
             }
         }
+    }
+    .facebook-login {
+        display: block;
     }
 }
 
@@ -58,6 +65,7 @@ form {
 
     input.input-find {
         @include border-radius(10px);
+        border: 3px solid #000;
         color: #331133;
         font-family: arial;
         font-size: 20px;
@@ -67,11 +75,23 @@ form {
         padding: 10px;
         text-transform: uppercase;
         width: 600px;
+        outline: none;
+
+        &:active,
+        &:focus {
+            border: 3px solid $corSecundaria;
+        }
     }
     input[type=submit] {
         @include border-radius(10px);
-        margin: 0 0 0 20px;
+        background-color: $corPrincipal;
+        border: 1px solid $corSecundaria;
+        margin: 3px 0 0 20px;
         font-size: 20px;
+
+        &:hover {
+            background-color: $corSecundaria;
+        }
     }
     label {
         display: none;
