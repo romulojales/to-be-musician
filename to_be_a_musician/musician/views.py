@@ -21,11 +21,6 @@ class SongStateView(RedirectView):
         musician_song.state = state
         musician_song.save()
 
-    def get_context_data(self, *arg, **kwargs):
-        context = super(SongStateView, self).get_context_data(**kwargs)
-        context["request"] = self.request
-        return context
-
 
 class MusicianView(DetailView):
     model = User
