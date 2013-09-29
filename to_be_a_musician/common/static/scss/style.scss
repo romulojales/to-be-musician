@@ -121,3 +121,9 @@ form {
         }
     }
 }
+
+.search-result,
+.song-detail {
+  border-bottom: 1px dotted #ccc;
+  margin-bottom: 10px;
+}

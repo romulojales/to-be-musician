@@ -16,9 +16,9 @@
         {% endif %}
 
         {% for song in songs %}
-            <div>
-                <h3><a href="{{song.get_absolute_url}}#{{ song.api_id }}">{{ song.name }}</a></h3>
-                <small>{% blocktrans with artist=song.artist.name album=song.album.name %}By {{ artist }}, from {{ album }}.{% endblocktrans %}</small>
+            <div class="search-result">
+                <h3><a href="{{song.get_absolute_url}}">{{ song.name }}</a></h3>
+                <p>{% blocktrans with artist=song.artist.name album=song.album.name %}By <strong>{{ artist }}</strong>, from <strong>{{ album }}</strong>.{% endblocktrans %}</p>
                 <p>{{song.api_id|flash_player}}</p>
             </div>
         {% endfor %}

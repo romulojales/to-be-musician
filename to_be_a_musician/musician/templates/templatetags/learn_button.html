@@ -1,11 +1,11 @@
 {% load i18n %}
 
 {% if not state %}
-    <a href="{% url 'musician_song_state' state='learn' id=song.id %}">{% trans "I want to learn this song" %}</a>
+    <a class="button" href="{% url 'musician_song_state' state='learn' id=song.id %}">{% trans "I want to learn this song" %}</a>
 {% elif state == 'learn' %}
-    <a href="{% url 'musician_song_state' state='learning' id=song.id %}">{% trans "I'm learning this song" %}</a>
+    <a class="button" href="{% url 'musician_song_state' state='learning' id=song.id %}">{% trans "I'm learning this song" %}</a>
 {% elif state == 'learning' %}
-    <a href="{% url 'musician_song_state' state='learned' id=song.id %}">{% trans "I've alredy learned this song" %}</a>
+    <a class="button" href="{% url 'musician_song_state' state='learned' id=song.id %}">{% trans "I've alredy learned this song" %}</a>
 {% else %}
-    <span>Song learned!</span>
+    <a class="button disabled" href="#">{% trans "Song learned!" %}</a>
 {% endif %}
