@@ -23,7 +23,7 @@
                     {% learn_button user object %}
 
                     <a class="button"
-                        href="{% url 'songs_interpretation_add' artist_slug=object.artist.slug song_slug=object.slug %}">{% trans "Send your interpretation of this song" %}</a>
+                        href="{% url 'songs_interpretation_add' artist_slug=object.artist.slug album_slug=object.album.slug song_slug=object.slug %}">{% trans "Send your interpretation of this song" %}</a>
                 </p>
             {% endif %}
         </div>

@@ -5,7 +5,7 @@ from songs.views import (InterpretationView, InterpretationCreateView,
                          InterpretationDeleteView, InterpretationUpdateView,
                          SongView)
 
-SONG_URL_PATTERN = '(?P<artist_slug>[\w_-]+)/(?P<song_slug>[\w_-]+)'
+SONG_URL_PATTERN = '(?P<artist_slug>[\w_-]+)/(?P<album_slug>[\w_-]+)/(?P<song_slug>[\w_-]+)'
 
 interpretation_create_view = login_required(InterpretationCreateView.as_view())
 interpretation_update_view = login_required(InterpretationUpdateView.as_view())

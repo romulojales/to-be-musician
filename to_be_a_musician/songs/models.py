@@ -42,6 +42,7 @@ class Song(models.Model):
     def get_absolute_url(self):
         return reverse('songs_song', kwargs={
             'artist_slug': self.artist.slug,
+            'album_slug': self.album.slug,
             'song_slug': self.slug,
         })
 
@@ -67,6 +68,7 @@ class Interpretation(models.Model):
     def get_absolute_url(self):
         return reverse('songs_interpretation_detail', kwargs={
             'artist_slug': self.song.artist.slug,
+            'album_slug': self.song.album.slug,
             'song_slug': self.song.slug,
             'id': self.pk,
         })

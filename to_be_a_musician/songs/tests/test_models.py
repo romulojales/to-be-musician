@@ -60,10 +60,13 @@ class SongsSongTestCase(SongsBaseTestCase):
     @classmethod
     def setUpClass(cls):
         cls.song = mommy.make('songs.song', name='Seek and Destroy',
-                              artist__name='Metallica')
+                              artist__name='Metallica',
+                              album__name="Kill 'em All")
 
     @classmethod
     def tearDownClass(cls):
+        cls.song.artist.delete()
+        cls.song.album.delete()
         cls.song.delete()
 
     def test_slug_generation(self):
@@ -78,6 +81,7 @@ class SongsSongTestCase(SongsBaseTestCase):
     def test_get_absolute_url(self):
         expected_url = reverse('songs_song', kwargs={
             'artist_slug': 'metallica',
+            'album_slug': 'kill-em-all',
             'song_slug': 'seek-and-destroy',
         })
         self.assertEqual(self.song.get_absolute_url(), expected_url)
@@ -99,6 +103,7 @@ class SongsInterpretationTestCase(SongsBaseTestCase):
     def setUpClass(cls):
         cls.interpretation = mommy.make('songs.interpretation',
                                     song__name='Seek and Destroy',
+                                    album__name="Kill 'em All",
                                     artist__name='Metallica',
                                     user__username='romulo')
 
@@ -115,7 +120,7 @@ class SongsInterpretationTestCase(SongsBaseTestCase):
 
     def test_get_absolute_url(self):
         url = self.interpretation.get_absolute_url()
-        self.assertEqual(url, '/songs/metallica/seek-and-destroy/interpretation/1/')
+        self.assertEqual(url, '/songs/metallica/kill-em-all/seek-and-destroy/interpretation/1/')
 
     def test_fill_last_update_when_saving_an_interpretation(self):
         self.interpretation.save()
