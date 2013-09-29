@@ -18,13 +18,13 @@
 
             <p>{{object.api_id|flash_player}}</p>
 
-            {% if request.user.is_authenticated %}
                 <p>
+                {% if request.user.is_authenticated %}
                     {% learn_button user object %}
+                {% endif %}
                     <a class="button"
                         href="{% url 'songs_interpretation_add' artist_slug=object.artist.slug song_slug=object.slug %}">{% trans "Send your interpretation of this song" %}</a>
                 </p>
-            {% endif %}
 
         </div>
 
