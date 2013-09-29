@@ -103,6 +103,10 @@ class SongsInterpretationTestCase(SongsBaseTestCase):
         self.assertEqual(unicode(self.interpretation),
                         u"Rômulo's interpretation of Seek and Destroy (Metallica)")
 
+    def test_fill_last_update_when_saving_an_interpretation(self):
+        self.interpretation.save()
+        self.assertTrue(self.interpretation.last_update)
+
 
 class SearchSongTests(SongsBaseTestCase):
     @classmethod
