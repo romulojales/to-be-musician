@@ -105,7 +105,8 @@ class SongsInterpretationTestCase(SongsBaseTestCase):
                                     song__name='Seek and Destroy',
                                     album__name="Kill 'em All",
                                     artist__name='Metallica',
-                                    user__username='romulo')
+                                    user__username='romulo',
+                                    uuid='1')
 
     @classmethod
     def tearDownClass(cls):

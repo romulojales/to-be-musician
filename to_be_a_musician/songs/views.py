@@ -29,7 +29,7 @@ class SongsGetObjectMixin(object):
             'song__artist__slug': self.kwargs['artist_slug'],
             'song__album__slug': self.kwargs['album_slug'],
             'song__slug': self.kwargs['song_slug'],
-            'id': self.kwargs['id'],
+            'uuid': self.kwargs['uuid'],
         }
         return kwargs
 

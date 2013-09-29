@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 import autoslug
+from django_extensions.db.fields import UUIDField
 from djtinysong import search_music
 
 
@@ -51,6 +52,7 @@ class Song(models.Model):
 
 
 class Interpretation(models.Model):
+    uuid = UUIDField()
     user = models.ForeignKey(User)
     song = models.ForeignKey(Song)
     created_at = models.DateTimeField(_('Created at'), default=timezone.now)
@@ -70,7 +72,7 @@ class Interpretation(models.Model):
             'artist_slug': self.song.artist.slug,
             'album_slug': self.song.album.slug,
             'song_slug': self.song.slug,
-            'id': self.pk,
+            'uuid': self.uuid,
         })
 
     def save(self, *args, **kwargs):

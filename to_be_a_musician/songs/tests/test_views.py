@@ -116,13 +116,14 @@ class SongInterpretationDetailViewTestCase(SongsBaseViewTestCase):
         super(SongInterpretationDetailViewTestCase, cls).setUpClass()
 
         cls.interpretation = mommy.make('songs.interpretation',
+                                        uuid='1-2-3-4',
                                         song=cls.song)
 
         cls.url = reverse('songs_interpretation_detail', kwargs={
             'artist_slug': 'metallica',
             'album_slug': 'master-of-puppets',
             'song_slug': 'master-of-puppets',
-            'id': cls.interpretation.pk,
+            'uuid': cls.interpretation.uuid,
         })
 
     @classmethod
@@ -133,7 +134,7 @@ class SongInterpretationDetailViewTestCase(SongsBaseViewTestCase):
         cls.interpretation.delete()
 
     def test_interpretation_detail_route(self):
-        expected_route = "/songs/metallica/master-of-puppets/master-of-puppets/interpretation/{0}/".format(self.interpretation.pk)
+        expected_route = "/songs/metallica/master-of-puppets/master-of-puppets/interpretation/{0}/".format(self.interpretation.uuid)
         self.assertEqual(self.url, expected_route)
 
     def test_object_is_in_context(self):
@@ -153,13 +154,14 @@ class SongInterpretationUpdateViewTestCase(SongsBaseViewTestCase):
         cls.user.save()
 
         cls.interpretation = mommy.make('songs.interpretation',
+                                        uuid='1-2-3-4',
                                         song=cls.song, user=cls.user)
 
         cls.url = reverse('songs_interpretation_edit', kwargs={
             'artist_slug': 'metallica',
             'album_slug': 'master-of-puppets',
             'song_slug': 'master-of-puppets',
-            'id': cls.interpretation.pk,
+            'uuid': cls.interpretation.uuid,
         })
 
     @classmethod
@@ -173,7 +175,7 @@ class SongInterpretationUpdateViewTestCase(SongsBaseViewTestCase):
         self.client.login(username='test', password='test')
 
     def test_interpretation_edit_route(self):
-        expected_route = "/songs/metallica/master-of-puppets/master-of-puppets/interpretation/{0}/edit/".format(self.interpretation.pk)
+        expected_route = "/songs/metallica/master-of-puppets/master-of-puppets/interpretation/{0}/edit/".format(self.interpretation.uuid)
         self.assertEqual(self.url, expected_route)
 
     def test_song_is_in_context(self):
@@ -216,13 +218,14 @@ class SongInterpretationDeleteViewTestCase(SongsBaseViewTestCase):
 
     def setUp(self):
         self.interpretation = mommy.make('songs.interpretation',
+                                          uuid='1-2-3-4',
                                           song=self.song, user=self.user)
 
         self.url = reverse('songs_interpretation_delete', kwargs={
             'artist_slug': 'metallica',
             'album_slug': 'master-of-puppets',
             'song_slug': 'master-of-puppets',
-            'id': self.interpretation.pk,
+            'uuid': self.interpretation.uuid,
         })
         self.client.login(username='test', password='test')
 
@@ -230,7 +233,7 @@ class SongInterpretationDeleteViewTestCase(SongsBaseViewTestCase):
         self.interpretation.delete()
 
     def test_interpretation_delete_route(self):
-        expected_route = "/songs/metallica/master-of-puppets/master-of-puppets/interpretation/{0}/delete/".format(self.interpretation.pk)
+        expected_route = "/songs/metallica/master-of-puppets/master-of-puppets/interpretation/{0}/delete/".format(self.interpretation.uuid)
         self.assertEqual(self.url, expected_route)
 
     def test_song_is_in_context(self):

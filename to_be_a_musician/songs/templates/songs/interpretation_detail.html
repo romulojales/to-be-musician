@@ -38,8 +38,8 @@
         <p class="button-group">
         {% if user == interpretation.user %}
             {% learn_button user object.song %}
-            <a href="{% url 'songs_interpretation_edit' artist_slug=object.song.artist.slug album_slug=object.song.album.slug song_slug=object.song.slug id=object.pk %}" class="button">Edit</a>
-            <a href="{% url 'songs_interpretation_delete' artist_slug=object.song.artist.slug album_slug=object.song.album.slug song_slug=object.song.slug id=object.pk %}" class="button alert">Delete</a>
+            <a href="{% url 'songs_interpretation_edit' artist_slug=object.song.artist.slug album_slug=object.song.album.slug song_slug=object.song.slug uuid=object.uuid %}" class="button">Edit</a>
+            <a href="{% url 'songs_interpretation_delete' artist_slug=object.song.artist.slug album_slug=object.song.album.slug song_slug=object.song.slug uuid=object.uuid %}" class="button alert">Delete</a>
         {% endif %}
         </p>
 

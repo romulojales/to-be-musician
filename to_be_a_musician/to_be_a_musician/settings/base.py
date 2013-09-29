@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     # Third-party apps
     'south',
     'social.apps.django_app.default',
+    'django_extensions',
 
     # Our apps
     'djtinysong',
