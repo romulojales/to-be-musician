@@ -9,8 +9,9 @@ class SongsGetSongObjectMixin(object):
 
     def get_song_object(self):
         artist_slug = self.kwargs['artist_slug']
+        album_slug = self.kwargs['album_slug']
         song_slug = self.kwargs['song_slug']
-        song = get_object_or_404(Song, slug=song_slug,
+        song = get_object_or_404(Song, slug=song_slug, album__slug=album_slug,
                                  artist__slug=artist_slug)
         return song
 
@@ -26,6 +27,7 @@ class SongsGetObjectMixin(object):
     def get_queryset_kwargs(self):
         kwargs = {
             'song__artist__slug': self.kwargs['artist_slug'],
+            'song__album__slug': self.kwargs['album_slug'],
             'song__slug': self.kwargs['song_slug'],
             'id': self.kwargs['id'],
         }
@@ -40,9 +42,11 @@ class SongView(DetailView):
             queryset = self.get_queryset()
 
         artist_slug = self.kwargs['artist_slug']
+        album_slug = self.kwargs['album_slug']
         song_slug = self.kwargs['song_slug']
 
         return get_object_or_404(queryset, slug=song_slug,
+                                 album__slug=album_slug,
                                  artist__slug=artist_slug)
 
     def get_context_data(self, *args, **kwargs):

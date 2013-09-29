@@ -14,11 +14,14 @@ class MusicianBaseViewTestCase(TestCase):
         cls.user.set_password('test')
         cls.user.save()
         cls.song = mommy.make('songs.song', name='Got the Time',
+                               album__name='Persistence of Time',
                                artist__name='Anthrax')
 
     @classmethod
     def tearDownClass(cls):
         cls.user.delete()
+        cls.song.album.delete()
+        cls.song.artist.delete()
         cls.song.delete()
 
     def get_route(self, state):
@@ -93,7 +96,7 @@ class MusicianChangeLearningStateTestCase(MusicianBaseViewTestCase):
 
     def test_redirect_to_music_page(self):
         response = self.client.get(self.get_route('learn'))
-        self.assertRedirects(response, '/songs/anthrax/got-the-time/', status_code=301)
+        self.assertRedirects(response, '/songs/anthrax/persistence-of-time/got-the-time/', status_code=301)
 
     def test_dont_duplicate_a_musician_song(self):
         self.client.get(self.get_route('learn'))
