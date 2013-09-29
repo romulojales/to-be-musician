@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block main %}
+    {% for song in object.song_set.all %}
+    {{song.state}} - {{song.song.name}}
+    {% endfor %}
+{% endblock %}

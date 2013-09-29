@@ -1,7 +1,10 @@
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
-from songs.models import Song
+from django.views.generic.detail import DetailView
+
 from musician.models import Song as MusicianSong
+from songs.models import Song
 
 
 class SongStateView(RedirectView):
@@ -18,6 +21,20 @@ class SongStateView(RedirectView):
         musician_song.state = state
         musician_song.save()
 
-# 
-# class MusicianView(TemplateView):
-#     pass
+    def get_context_data(self, *arg, **kwargs):
+        context = super(SongStateView, self).get_context_data(**kwargs)
+        context["request"] = self.request
+        return context
+
+
+class MusicianView(DetailView):
+    model = User
+    template_name = "musician.html"
+
+    def get_object(self):
+        return self.request.user
+
+    def get_context_data(self, *arg, **kwargs):
+        context = super(MusicianView, self).get_context_data(**kwargs)
+        context["request"] = self.request
+        return context
