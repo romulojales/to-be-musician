@@ -3,8 +3,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-import autoslug
-from django_extensions.db.fields import UUIDField
+from django_extensions.db.fields import UUIDField, AutoSlugField
 from djtinysong import search_music
 
 
@@ -12,7 +11,7 @@ class Artist(models.Model):
     api_id = models.CharField(_('API ID'), max_length=100, blank=True,
                               null=True, db_index=True)
     name = models.CharField(_('Name'), max_length=255)
-    slug = autoslug.AutoSlugField(populate_from='name', unique=False)
+    slug = AutoSlugField(populate_from='name', unique=False)
 
     def __unicode__(self):
         return self.name
@@ -22,7 +21,7 @@ class Album(models.Model):
     api_id = models.CharField(_('API ID'), max_length=100, blank=True,
                               null=True, db_index=True)
     name = models.CharField(_('Name'), max_length=255)
-    slug = autoslug.AutoSlugField(populate_from='name', unique=False)
+    slug = AutoSlugField(populate_from='name', unique=False)
 
     def __unicode__(self):
         return self.name
@@ -35,7 +34,7 @@ class Song(models.Model):
     album = models.ForeignKey(Album)
     name = models.CharField(_('Name'), max_length=255)
     tinysong_url = models.URLField('Tinysong URL')
-    slug = autoslug.AutoSlugField(populate_from='name', unique=False)
+    slug = AutoSlugField(populate_from='name', unique=False)
 
     def __unicode__(self):
         return self.name
