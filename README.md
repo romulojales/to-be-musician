@@ -27,27 +27,22 @@ You can install `to-be-musician` cloning it from GitHub:
 
         $ git clone git@github.com:romulojales/to-be-musician.git to_be_musician
 
-Use pip to install all project's dependencies:
+Use `make setup` to install all project's dependencies and run migrations:
 
         $ cd to_be_musician/
-        $ pip install -r requirements-dev.txt
-
-Oh yeah! The `requirements.txt` file is only for our buddy **Heroku**.
+        $ make setup
 
 Now you can run all tests:
 
-        $ cd to_be_a_musician/
-        $ python manage.py test
-
-You need to run `syncdb` with `--migrate` to create your database with all the good stuff inside:
-
-        $ python manage.py syncdb --migrate
+        $ make test
 
 And run the Django built-in server:
 
-        $ python manage.py runserver
+        $ make run
 
-Soon, we'll create a `Makefile`. That is a promise.
+The project uses `Sass` and `Compass`, so, if you want to do some styles, it's necessary to run the watcher:
+
+        $ make compass
 
 
 Facebook authentication x development environment
