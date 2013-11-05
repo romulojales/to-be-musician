@@ -10,10 +10,3 @@ DATABASES = {
 
 # Tests configuration
 SOUTH_TESTS_MIGRATE = False
-
-def gen_func():
-    return None
-
-MOMMY_CUSTOM_FIELDS_GEN = {
-    'autoslug.fields.AutoSlugField': gen_func,
-}
