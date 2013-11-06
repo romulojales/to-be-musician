@@ -25,7 +25,7 @@ class Migration(DataMigration):
 
             i = 1
             for duplicated_song in duplicated_songs:
-                duplicated_song.slug = '{0}-{1}'.format(duplicated_song.slug, i)
+                duplicated_song.slug = '{0}-{1}'.format(duplicated_song.slug[:47], i)
                 duplicated_song.save()
                 i += 1
 
