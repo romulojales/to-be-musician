@@ -9,12 +9,12 @@ DATABASES = {
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Static configuration
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = PROJECT_ROOT_PATH.child('staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     PROJECT_ROOT_PATH.child('static'),
 )
 
-DEBUG=False
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
