@@ -36,6 +36,9 @@ class Song(models.Model):
     tinysong_url = models.URLField('Tinysong URL')
     slug = AutoSlugField(populate_from='name', unique=False)
 
+    class Meta:
+        ordering = ['name', 'artist']
+
     def __unicode__(self):
         return self.name
 
